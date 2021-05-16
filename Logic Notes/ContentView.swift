@@ -13,7 +13,7 @@ struct ContentView: View {
 	@State private var position = CGPoint(x: 400, y: 400)
 	
 	var body: some View {
-		CardCollection(title: "Group A")
+		CardCollectionView(title: "Group A")
 			.offset(self.draggedOffset)
 			.position(self.position)
 			.gesture(DragGesture()

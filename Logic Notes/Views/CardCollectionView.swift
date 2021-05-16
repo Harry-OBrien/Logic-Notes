@@ -8,7 +8,11 @@
 import SwiftUI
 import Foundation
 
-struct CardCollection: View {
+
+
+struct CardCollectionView: View {
+	
+	@ObservedObject var collectionVM = CardCollectionViewModel()
 	
 	let title: String
 	let backgroundColour = Color(white:237/255)
@@ -30,9 +34,9 @@ struct CardCollection: View {
 		
 				
 			HStack {
-				Card()
-				Card()
-				Card()
+				ForEach(collectionVM.notes) { note in
+					NoteView(content: note.content)
+				}
 			}
 			.frame(width: 460, height: 220, alignment: .center)
 			.background(backgroundColour)
@@ -49,7 +53,7 @@ struct CardCollection: View {
 struct Card_Collection_Previews: PreviewProvider {
 	static var previews: some View {
 		Group {
-			CardCollection(title: "Group A")
+			CardCollectionView(title: "Group A")
 		}
 	}
 }

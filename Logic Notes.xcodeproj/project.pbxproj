@@ -13,8 +13,10 @@
 		1607874F264F048C00B24979 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1607874E264F048C00B24979 /* Preview Assets.xcassets */; };
 		16078751264F048C00B24979 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16078750264F048C00B24979 /* Persistence.swift */; };
 		16078754264F048C00B24979 /* Logic_Notes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16078752264F048C00B24979 /* Logic_Notes.xcdatamodeld */; };
-		16536C9D265041B400B46433 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16536C9C265041B400B46433 /* Card.swift */; };
-		16536C9F265073C300B46433 /* CardCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16536C9E265073C300B46433 /* CardCollection.swift */; };
+		16536C9D265041B400B46433 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16536C9C265041B400B46433 /* NoteView.swift */; };
+		16536C9F265073C300B46433 /* CardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16536C9E265073C300B46433 /* CardCollectionView.swift */; };
+		16536CA226513C2300B46433 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16536CA126513C2300B46433 /* Note.swift */; };
+		16536CA526513C4600B46433 /* CardCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16536CA426513C4600B46433 /* CardCollectionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +28,10 @@
 		16078750264F048C00B24979 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		16078753264F048C00B24979 /* Logic_Notes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Logic_Notes.xcdatamodel; sourceTree = "<group>"; };
 		16078755264F048C00B24979 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		16536C9C265041B400B46433 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		16536C9E265073C300B46433 /* CardCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollection.swift; sourceTree = "<group>"; };
+		16536C9C265041B400B46433 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		16536C9E265073C300B46433 /* CardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionView.swift; sourceTree = "<group>"; };
+		16536CA126513C2300B46433 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		16536CA426513C4600B46433 /* CardCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +64,9 @@
 		16078746264F048900B24979 /* Logic Notes */ = {
 			isa = PBXGroup;
 			children = (
-				16536C9B2650419B00B46433 /* views */,
+				16536CA326513C3800B46433 /* ViewModels */,
+				16536CA026513C1100B46433 /* Models */,
+				16536C9B2650419B00B46433 /* Views */,
 				16078747264F048900B24979 /* Logic_NotesApp.swift */,
 				16078749264F048900B24979 /* ContentView.swift */,
 				1607874B264F048C00B24979 /* Assets.xcassets */,
@@ -80,13 +86,29 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		16536C9B2650419B00B46433 /* views */ = {
+		16536C9B2650419B00B46433 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				16536C9C265041B400B46433 /* Card.swift */,
-				16536C9E265073C300B46433 /* CardCollection.swift */,
+				16536C9C265041B400B46433 /* NoteView.swift */,
+				16536C9E265073C300B46433 /* CardCollectionView.swift */,
 			);
-			path = views;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		16536CA026513C1100B46433 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				16536CA126513C2300B46433 /* Note.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		16536CA326513C3800B46433 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				16536CA426513C4600B46433 /* CardCollectionViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,8 +182,10 @@
 			files = (
 				16078751264F048C00B24979 /* Persistence.swift in Sources */,
 				1607874A264F048900B24979 /* ContentView.swift in Sources */,
-				16536C9D265041B400B46433 /* Card.swift in Sources */,
-				16536C9F265073C300B46433 /* CardCollection.swift in Sources */,
+				16536CA526513C4600B46433 /* CardCollectionViewModel.swift in Sources */,
+				16536CA226513C2300B46433 /* Note.swift in Sources */,
+				16536C9D265041B400B46433 /* NoteView.swift in Sources */,
+				16536C9F265073C300B46433 /* CardCollectionView.swift in Sources */,
 				16078754264F048C00B24979 /* Logic_Notes.xcdatamodeld in Sources */,
 				16078748264F048900B24979 /* Logic_NotesApp.swift in Sources */,
 			);
