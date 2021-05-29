@@ -8,17 +8,38 @@
 import Foundation
 import SwiftUI
 
-class NoteCollectionViewModel: ObservableObject, Identifiable, Equatable {
+class NoteCollectionViewModel: ObservableObject, Identifiable, Equatable, DropDelegate {
+	func performDrop(info: DropInfo) -> Bool {
+		for provider in info.itemProviders(for: NoteViewModel.writableTypeIdentifiersForItemProvider) {
+			provider.loadObject(ofClass: NoteViewModel.self) { data, error in
+				if let error = error {
+					print(error.localizedDescription)
+					return
+				}
+				
+				if let noteVm = data as? NoteViewModel {
+					// add noteVM to collection
+					DispatchQueue.main.async {
+						self.noteViewModels.append(noteVm)
+					}
+				}
+			}
+		}
+		
+		return true
+	}
+	
 	static func == (lhs: NoteCollectionViewModel, rhs: NoteCollectionViewModel) -> Bool {
 		lhs.id == rhs.id
 	}
 	
 	var id = UUID()
 	
-	@Published var collection: Collection
+	private var collection: Collection
 	
 	@Published var title: String
 	
+	// TODO: Move this into view
 	@Published var size: CGSize!
 	let padding: CGFloat = 10
 	let marginWidth: CGFloat = 50
@@ -48,32 +69,32 @@ class NoteCollectionViewModel: ObservableObject, Identifiable, Equatable {
 		self.noteViewModels = notes.map({return NoteViewModel(note: $0)})
 	}
 	
-	func remove(note: Note) -> Bool {
-		
-		// create new collection without given note
-		let filteredNotes = collection.notes.filter { $0 != note }
-		
-		// Check that we removed the note successfully
-		guard filteredNotes.count == (collection.notes.count - 1) else {
-			print("Note not removed. Did it even exist in this collection?")
-			return false
-		}
-		
-		// set our notes collection to the filtered collection
-		collection.notes = filteredNotes
-		
-		return true
-	}
-	
-	func add(note: Note) {
-		collection.notes.append(note)
-	}
-	
-	func add(notes: [Note]) {
-		collection.notes.append(contentsOf: notes)
-	}
-	
-	func clear() {
-		collection.notes = []
-	}
+//	func remove(note: Note) -> Bool {
+//
+//		// create new collection without given note
+//		let filteredNotes = collection.notes.filter { $0 != note }
+//
+//		// Check that we removed the note successfully
+//		guard filteredNotes.count == (collection.notes.count - 1) else {
+//			print("Note not removed. Did it even exist in this collection?")
+//			return false
+//		}
+//
+//		// set our notes collection to the filtered collection
+//		collection.notes = filteredNotes
+//
+//		return true
+//	}
+//
+//	func add(note: Note) {
+//		collection.notes.append(note)
+//	}
+//
+//	func add(notes: [Note]) {
+//		collection.notes.append(contentsOf: notes)
+//	}
+//
+//	func clear() {
+//		collection.notes = []
+//	}
 }

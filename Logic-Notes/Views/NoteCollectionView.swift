@@ -52,6 +52,9 @@ struct NoteCollectionView: View {
 			HStack {
 				ForEach(collectionVM.noteViewModels) { noteVM in
 					NoteView(noteVM: noteVM)
+						.onDrag {
+							NSItemProvider(object: noteVM)
+						}
 				}
 			}
 			.frame(width: collectionVM.size.width,
@@ -66,6 +69,7 @@ struct NoteCollectionView: View {
 		}
 		.offset(offset)
 		.gesture(simpleDrag)
+		.onDrop(of: NoteViewModel.writableTypeIdentifiersForItemProvider, delegate: self.collectionVM)
 	}
 }
 

@@ -14,20 +14,20 @@ struct NoteView: View {
 	let backgroundColour = Color(red: 253/255, green: 224/255, blue: 45/255)
 	let borderColour = Color(red: 243/255, green: 216/255, blue: 46/255)
 	
-	@State private var offset = CGSize.zero
-	@GestureState private var startOffset: CGSize?
+//	@State private var offset = CGSize.zero
+//	@GestureState private var startOffset: CGSize?
 	
-	var simpleDrag: some Gesture {
-		DragGesture()
-			.onChanged { value in				
-				var newOffset = startOffset ?? offset
-				newOffset.width += value.translation.width
-				newOffset.height += value.translation.height
-				self.offset = newOffset
-			}.updating($startOffset) { (value, startOffset, transaction) in
-				startOffset = startOffset ?? offset
-			}
-	}
+//	var simpleDrag: some Gesture {
+//		DragGesture()
+//			.onChanged { value in
+//				var newOffset = startOffset ?? offset
+//				newOffset.width += value.translation.width
+//				newOffset.height += value.translation.height
+//				self.offset = newOffset
+//			}.updating($startOffset) { (value, startOffset, transaction) in
+//				startOffset = startOffset ?? offset
+//			}
+//	}
 	
 	var body: some View {
 		Text(noteVM.content)
@@ -35,8 +35,8 @@ struct NoteView: View {
 			.frame(width: noteVM.size.width, height: noteVM.size.height, alignment: .center)
 			.background(backgroundColour)
 			.border(borderColour, width: 1.5)
-			.gesture(simpleDrag)
-			.offset(offset)
+//			.gesture(simpleDrag)
+//			.offset(offset)
 	}
 }
 
