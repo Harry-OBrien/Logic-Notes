@@ -53,7 +53,7 @@ struct NoteCollectionView: View {
 				ForEach(collectionVM.noteViewModels) { noteVM in
 					NoteView(noteVM: noteVM)
 						.onDrag {
-							NSItemProvider(object: noteVM)
+							NSItemProvider(object: noteVM.note)
 						}
 				}
 			}
@@ -69,17 +69,17 @@ struct NoteCollectionView: View {
 		}
 		.offset(offset)
 		.gesture(simpleDrag)
-		.onDrop(of: NoteViewModel.writableTypeIdentifiersForItemProvider, delegate: self.collectionVM)
+		.onDrop(of: Note.writableTypeIdentifiersForItemProvider, delegate: self.collectionVM)
 	}
 }
 
 struct NoteCollectionView_Previews: PreviewProvider {
 	static var previews: some View {
 		NoteCollectionView(collectionVM: NoteCollectionViewModel(collection: Collection(
-																	title: "Test collection",
-																	notes: [
-																		.init(content: "Test Note")
-																	]
+			title: "Test collection",
+			notes: [
+				.init(content: "Test Note")
+			]
 		)))
 	}
 }

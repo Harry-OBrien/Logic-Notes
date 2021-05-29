@@ -9,9 +9,6 @@ import SwiftUI
 
 /*
 TODO:
-	Modify collection view to use an actual grid instead of hoping autoLayout does its job
-	Move notes between indeces of collection
-	Move note from collection to another
 	Group the collections into a single scrollable (horizontal and vertical) and zoomable view
 */
 

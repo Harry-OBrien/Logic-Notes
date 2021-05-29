@@ -10,17 +10,19 @@ import SwiftUI
 
 class NoteCollectionViewModel: ObservableObject, Identifiable, Equatable, DropDelegate {
 	func performDrop(info: DropInfo) -> Bool {
-		for provider in info.itemProviders(for: NoteViewModel.writableTypeIdentifiersForItemProvider) {
-			provider.loadObject(ofClass: NoteViewModel.self) { data, error in
+		for provider in info.itemProviders(for: Note.writableTypeIdentifiersForItemProvider) {
+			provider.loadObject(ofClass: Note.self) { data, error in
 				if let error = error {
 					print(error.localizedDescription)
 					return
 				}
 				
-				if let noteVm = data as? NoteViewModel {
+				if let note = data as? Note {
+					let noteVM = NoteViewModel(note: note)
+					
 					// add noteVM to collection
 					DispatchQueue.main.async {
-						self.noteViewModels.append(noteVm)
+						self.noteViewModels.append(noteVM)
 					}
 				}
 			}
@@ -35,14 +37,23 @@ class NoteCollectionViewModel: ObservableObject, Identifiable, Equatable, DropDe
 	
 	var id = UUID()
 	
-	private var collection: Collection
+	private var collection: Collection {
+		didSet {
+			var newNoteViewModels = [NoteViewModel]()
+			for note in collection.notes {
+				newNoteViewModels.append(NoteViewModel(note: note))
+			}
+			
+			self.noteViewModels = newNoteViewModels
+		}
+	}
 	
 	@Published var title: String
 	
 	// TODO: Move this into view
 	@Published var size: CGSize!
-	let padding: CGFloat = 10
-	let marginWidth: CGFloat = 50
+	private let padding: CGFloat = 10
+	private let marginWidth: CGFloat = 50
 	
 	@Published var noteViewModels: [NoteViewModel]! {
 		didSet {
@@ -53,13 +64,13 @@ class NoteCollectionViewModel: ObservableObject, Identifiable, Equatable, DropDe
 			}
 			
 			// Update the size of the collection
-			let note_width = noteViewModels[0].size.width + self.padding
+			let note_width = 120 + self.padding
 			let newWidth: CGFloat = note_width * CGFloat(noteViewModels.count) + marginWidth
 			self.size = CGSize(width: newWidth, height: 220)
 		}
 	}
 	
-	init(collection: Collection) {
+	init(collection: Collection, delegate: InterCollectionDelegate) {
 		self.collection = collection
 		self.title = collection.title
 		self.setNoteViewModels(notes: collection.notes)
@@ -69,32 +80,24 @@ class NoteCollectionViewModel: ObservableObject, Identifiable, Equatable, DropDe
 		self.noteViewModels = notes.map({return NoteViewModel(note: $0)})
 	}
 	
-//	func remove(note: Note) -> Bool {
-//
-//		// create new collection without given note
-//		let filteredNotes = collection.notes.filter { $0 != note }
-//
-//		// Check that we removed the note successfully
-//		guard filteredNotes.count == (collection.notes.count - 1) else {
-//			print("Note not removed. Did it even exist in this collection?")
-//			return false
-//		}
-//
-//		// set our notes collection to the filtered collection
-//		collection.notes = filteredNotes
-//
-//		return true
-//	}
-//
-//	func add(note: Note) {
-//		collection.notes.append(note)
-//	}
-//
-//	func add(notes: [Note]) {
-//		collection.notes.append(contentsOf: notes)
-//	}
-//
-//	func clear() {
-//		collection.notes = []
-//	}
+	func remove(note: Note) -> Bool {
+
+		// create new collection without given note
+		let filteredNotes = collection.notes.filter { $0 != note }
+
+		// Check that we removed the note successfully
+		guard filteredNotes.count == (collection.notes.count - 1) else {
+			print("Note not removed. Did it even exist in this collection?")
+			return false
+		}
+
+		// set our notes collection to the filtered collection
+		collection.notes = filteredNotes
+
+		return true
+	}
+
+	func add(note: Note) {
+		collection.notes.append(note)
+	}
 }

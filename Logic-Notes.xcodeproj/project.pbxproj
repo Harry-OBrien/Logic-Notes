@@ -18,6 +18,7 @@
 		16AAE99A26542143008343C4 /* NoteCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE99926542143008343C4 /* NoteCollectionViewModel.swift */; };
 		16AAE99C26542174008343C4 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE99B26542174008343C4 /* Collection.swift */; };
 		16AAE99E2654217C008343C4 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE99D2654217C008343C4 /* Note.swift */; };
+		16BFAE3D2662B0CB0087AAB2 /* InterCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BFAE3C2662B0CB0087AAB2 /* InterCollectionDelegate.swift */; };
 		16D884C026545832004A773A /* Logic_NotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE96526541A87008343C4 /* Logic_NotesApp.swift */; };
 		16D884C126545832004A773A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16AAE96926541A88008343C4 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		16AAE99926542143008343C4 /* NoteCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionViewModel.swift; sourceTree = "<group>"; };
 		16AAE99B26542174008343C4 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		16AAE99D2654217C008343C4 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		16BFAE3C2662B0CB0087AAB2 /* InterCollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterCollectionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		16AAE96426541A87008343C4 /* Logic-Notes */ = {
 			isa = PBXGroup;
 			children = (
+				16BFAE3B2662B0B70087AAB2 /* Protocols */,
 				16AAE99426542069008343C4 /* ViewModels */,
 				16AAE99226541B3B008343C4 /* Models */,
 				16AAE99126541B35008343C4 /* Views */,
@@ -181,6 +184,14 @@
 				163CB62F26543C320065D551 /* NoteViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		16BFAE3B2662B0B70087AAB2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				16BFAE3C2662B0CB0087AAB2 /* InterCollectionDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +328,7 @@
 				163CB63026543C320065D551 /* NoteViewModel.swift in Sources */,
 				16AAE99E2654217C008343C4 /* Note.swift in Sources */,
 				163CB62E265435CA0065D551 /* BoardViewModel.swift in Sources */,
+				16BFAE3D2662B0CB0087AAB2 /* InterCollectionDelegate.swift in Sources */,
 				16AAE96826541A87008343C4 /* BoardView.swift in Sources */,
 				16AAE99C26542174008343C4 /* Collection.swift in Sources */,
 				16AAE996265420C2008343C4 /* NoteView.swift in Sources */,
