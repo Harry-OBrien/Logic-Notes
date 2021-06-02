@@ -8,33 +8,52 @@
 import Foundation
 
 struct Collection: Identifiable, Equatable {
-	let id = UUID()
+	static func == (lhs: Collection, rhs: Collection) -> Bool {
+		lhs.id == rhs.id
+	}
+	
+	let id: UUID
 	var title: String
 	var notes: [Note]
+	var locked: Bool
+	var offset: (Double, Double)
+	
+	init(title: String,
+		 notes: [Note],
+		 locked: Bool = false,
+		 offset: (Double, Double) = (0.0, 0.0))
+	{
+		self.id = UUID()
+		self.title = title
+		self.notes = notes
+		self.locked = locked
+		self.offset = offset
+	}
 }
 
 extension Collection{
 	static func getMockCollections() -> [Collection] {
 		
 		let collections: [Collection] = [
-			.init(title: "Group A",
+			.init(title: "To Do",
 				  notes: [
-					.init(content: "Note 1"),
-					.init(content: "Note 2"),
-					.init(content: "Note 3"),
-				  ]),
-			.init(title: "Group B",
+					.init(content: "Tidy room"),
+					.init(content: "Shopping"),
+					.init(content: "Machine Learning Lecture 3"),
+				  ],
+				  offset: (410, 568-300)),
+			.init(title: "Doing",
 				  notes: [
-					.init(content: "Note 4"),
-					.init(content: "Note 5")
-				  ]),
-			.init(title: "Group C",
+					.init(content: "Buy train tickets"),
+				  ],
+				  locked: true,
+				  offset: (410, 568)),
+			.init(title: "Complete",
 				  notes: [
-					.init(content: "Note 6"),
-					.init(content: "Note 7"),
-					.init(content: "Note 8"),
-					.init(content: "Note 9")
-				  ])
+					.init(content: "Run"),
+					.init(content: "Fix robot")
+				  ],
+				  offset: (410, 568+300))
 		]
 		
 		return collections

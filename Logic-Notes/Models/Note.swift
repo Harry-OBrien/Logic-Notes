@@ -8,7 +8,7 @@
 import Foundation
 import MobileCoreServices
 
-class Note: NSObject, Identifiable, NSItemProviderWriting, NSItemProviderReading, Codable{
+class Note: NSObject, Identifiable, NSItemProviderWriting, NSItemProviderReading, Codable {
 	var id : UUID
 	var content: String
 	
