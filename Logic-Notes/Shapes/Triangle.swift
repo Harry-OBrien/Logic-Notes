@@ -1,11 +1,10 @@
 //
-//  TriangleShape.swift
+//  Triangle.swift
 //  Logic-Notes
 //
-//  Created by Harry O'Brien on 29/05/2021.
+//  Created by Harry O'Brien on 03/06/2021.
 //
 
-import Foundation
 import SwiftUI
 
 struct Triangle: Shape {

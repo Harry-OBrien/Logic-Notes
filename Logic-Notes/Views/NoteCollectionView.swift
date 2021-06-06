@@ -10,159 +10,175 @@ import FASwiftUI
 
 struct NoteCollectionView: View {
 	
-	@ObservedObject var collectionVM: NoteCollectionViewModel
+	@ObservedObject var document: BoardDocument
+	let collection: Board.Collection
 	
+	@State private var showOptions = false
+	
+	private var notes: [Board.Collection.Note] {
+		collection.notes
+	}
+	
+	private var locked: Bool {
+		collection.locked
+	}
+	
+	// Colours
 	private let backgroundColour = Color(white:237/255)
 	private let accentColour = Color(white: 196/255)
-	@State private var titleBackgroundColour = Color(white:237/255)
 	private let highlightColour = Color(white: 160/255)
+	private let lockedHighlightColour = Color(red: 215/255, green: 58/255, blue: 74/255)
 	
-	@State private var offset = CGSize.zero
-	@GestureState private var startOffset: CGSize?
 	
+	// Sizing
 	private let baseSize = CGSize(width: 200, height: 200)
+	var zoomScale: CGFloat
 	private var size: CGSize {
 		get {
-			if collectionVM.noteViewModels.count > 1 {
-				let width = baseSize.width + NoteView.size.width * (CGFloat(collectionVM.noteViewModels.count) - 1)
+			// More than 1 note: expand the width
+			if notes.count > 1 {
+				let width = baseSize.width + NoteView.size.width * (CGFloat(collection.notes.count) - 1)
 				return CGSize(width: width, height: baseSize.height)
 			}
 			
+			// Only 1 note, return the base size
 			return baseSize
 		}
 	}
 	
-	@State var showOptions = false
+	// Drag
+	@GestureState private var gestureDragOffset: CGSize = .zero
+	@State private var dragging = false
 	
-	var simpleDrag: some Gesture {
+	var drag: some Gesture {
 		DragGesture()
 			.onChanged { value in
+				dragging = true
+			}
+			.updating($gestureDragOffset) { (latestDragValue, gestureDragOffset, transaction) in
 				// Don't move if locked
-				if self.collectionVM.isLocked {
+				if self.locked {
 					return
 				}
 				
-				// Change title colour
-				self.titleBackgroundColour = self.highlightColour
-				
-				var newOffset = startOffset ?? offset
-				newOffset.width += value.translation.width
-				newOffset.height += value.translation.height
-				self.offset = newOffset
-			}
-			.updating($startOffset) { (value, startOffset, transaction) in
-				startOffset = startOffset ?? offset
+				gestureDragOffset = latestDragValue.translation
 			}
 			.onEnded { value in
-				self.titleBackgroundColour = self.backgroundColour
+				dragging = false
+				if !self.locked {
+					document.moveCollection(collection, by: value.translation / zoomScale)
+				}
 			}
-	}
-	
-	init(collectionVM: NoteCollectionViewModel) {
-		self.collectionVM = collectionVM
 	}
 	
 	var body: some View {
-		GeometryReader { g in
-			VStack(alignment: .center, spacing: 0) {
-				if showOptions {
-					optionsHStack()
-				}
-				else {
-					optionsHStack().hidden()
-				}
-				collectionHeader(titled: collectionVM.title)
-				noteContainer(collectionVM.noteViewModels)
-			}
-			.position(collectionVM.initialPosition)
-			.offset(offset)
-			.gesture(simpleDrag)
-			.onDrop(of: Note.writableTypeIdentifiersForItemProvider, delegate: self.collectionVM)
-			.onTapGesture {
-				self.showOptions.toggle()
-			}
-		}
-	}
-
-	private func optionsHStack() -> some View {
 		VStack(alignment: .center, spacing: 0) {
-			HStack (spacing: 50) {
-				Button(action: {
-					withAnimation {
-						collectionVM.deleteCollection()
-					}
-				}, label: {
-					FAText(iconName: "trash-alt", size: 32)
-				})
-				
-				Button(action: {
-					collectionVM.isLocked.toggle()
-				}, label: {
-					lockIcon(locked: collectionVM.isLocked)
-				})
-			}
-			.foregroundColor(Color(white: 245/255))
-			.frame(width: 200, height: 60, alignment: .center)
-			.background(Color(white: 44/255))
-			.cornerRadius(6)
+			optionsStack(locked: collection.locked,
+						 onToggle: { document.toggleCollectionLocked(collection) },
+						 onDelete: { document.removeCollection(collection) })
+				.Hide(!showOptions)
 			
-			Triangle()
-				.fill(Color(white: 44/255))
-				.frame(width: 30, height: 15, alignment: .center)
+			// Collection Header
+			Text(collection.title)
+				.padding()
+				.font(Font.title)
+				.frame(minWidth: 180, minHeight: 60, maxHeight: 60, alignment: .center)
+				.background(showOptions || dragging ? highlightColour : backgroundColour)
+				.cornerRadius(30)
+				.overlay(RoundedRectangle(cornerRadius: 30)
+							.stroke(dragging && locked ? lockedHighlightColour : accentColour))
+				.offset(y: 30)
+				.zIndex(1.0)
+				.fixedSize()
+			
+			// Note Container
+			HStack {
+				ForEach(notes) { note in
+					NoteView(noteText: note.text)
+						.onDrag {
+							NSItemProvider(object: note)
+						}
+//						.onTapGesture {
+//
+//						}
+				}
+			}
+			.frame(width: size.width, height: size.height, alignment: .center)
+			.padding()
+			.background(backgroundColour)
+			.cornerRadius(6)
+			.overlay(
+				RoundedRectangle(cornerRadius: 6)
+					.stroke(dragging && locked ? lockedHighlightColour : accentColour)
+			)
 		}
-		.offset(y: 30)
-		.zIndex(1.0)
+		.scaleEffect(zoomScale)
+		.offset(gestureDragOffset)
+		.gesture(drag)
+		.onTapGesture {
+			self.showOptions.toggle()
+		}
+		.onDrop(of: Board.Collection.Note.writableTypeIdentifiersForItemProvider, isTargeted: nil, perform: { providers, _ in
+					self.drop(providers: providers)
+		})
+	}
+	
+	struct optionsStack: View {
+		var locked: Bool
+		var onToggle: () -> Void
+		var onDelete: () -> Void
 		
-	}
-	
-	private func lockIcon(locked: Bool) -> some View {
-		locked ? FAText(iconName: "lock", size: 32) : FAText(iconName: "unlock", size: 32)
-	}
-	
-	private func collectionHeader(titled title: String) -> some View {
-		Text(title)
-			.font(Font.title)
-			.frame(minWidth: 180, idealWidth: 180, maxWidth: size.width, minHeight: 60, maxHeight: 60)
-			.background(showOptions ? highlightColour : titleBackgroundColour)
-			.cornerRadius(30)
-			.overlay(RoundedRectangle(cornerRadius: 30)
-						.stroke(accentColour))
+		private let iconSize: CGFloat = 32
+		
+		var body: some View {
+			VStack(alignment: .center, spacing: 0) {
+				HStack (spacing: 50) {
+					Button(action: {
+						withAnimation {
+							onDelete()
+						}
+					}, label: {
+						FAText(iconName: "trash-alt", size: iconSize)
+					})
+					
+					Button(action: {
+						onToggle()
+					}, label: {
+						Group {
+							if locked {
+								FAText(iconName: "lock", size: iconSize)
+							}
+							else {
+								FAText(iconName: "unlock", size: iconSize)
+							}
+						}
+					})
+					
+					Button(action: {
+						print("edit btn pressed")
+					}, label: {
+						FAText(iconName: "pencil-alt", size: iconSize)
+					})
+				}
+				.foregroundColor(Color(white: 245/255))
+				.frame(width: 210, height: 60, alignment: .center)
+				.background(Color(white: 44/255))
+				.cornerRadius(6)
+				
+				Triangle()
+					.fill(Color(white: 44/255))
+					.frame(width: 30, height: 15, alignment: .center)
+			}
 			.offset(y: 30)
 			.zIndex(1.0)
+		}
 	}
 	
-	private func noteContainer(_ noteVMs: [NoteViewModel]) -> some View {
-		HStack {
-			ForEach(noteVMs) { noteVM in
-				NoteView(noteVM: noteVM)
-					.onDrag {
-						NSItemProvider(object: noteVM.note)
-					}
-			}
-			
+	private func drop(providers: [NSItemProvider]) -> Bool {
+		let found = providers.loadFirstObject(ofType: Board.Collection.Note.self) { note in
+			document.moveNote(note, to: collection)
 		}
-		.frame(width: size.width,
-			   height: size.height,
-			   alignment: .center)
-		.padding()
-		.background(backgroundColour)
-		.cornerRadius(6)
-		.overlay(
-			RoundedRectangle(cornerRadius: 6)
-				.stroke(accentColour)
-		)
-	}
-}
-
-struct NoteCollectionView_Previews: PreviewProvider {
-	static var previews: some View {
-		let collection = Collection(title: "Test collection",
-									notes: [
-										.init(content: "Test Note"),
-										.init(content: "Test Note"),
-										.init(content: "Test Note")
-									])
-		let vm = NoteCollectionViewModel(collection: collection, delegate: nil)
-		NoteCollectionView(collectionVM: vm)
+		
+		return found
 	}
 }
