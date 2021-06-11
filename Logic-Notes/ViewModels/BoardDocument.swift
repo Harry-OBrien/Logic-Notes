@@ -12,9 +12,11 @@ class BoardDocument: ObservableObject {
 	
 	@Published private var board: Board {
 		didSet {
-//			print("JSON: \(board.json?.utf8 ?? "Empty")")
+			print("JSON: \(board.json?.utf8 ?? "Empty")")
 		}
 	}
+	
+	var boardTitle: String { board.title }
 	var collections: [Board.Collection] { board.collections }
 	
 	@Published var steadyStateZoomScale: CGFloat = 1.0

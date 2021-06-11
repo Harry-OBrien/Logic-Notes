@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FASwiftUI
 
 struct BoardView: View {
 	
@@ -17,13 +16,11 @@ struct BoardView: View {
 	
 	@State private var addNotePresented = false
 	
-	private var zoomScale: CGFloat { document.steadyStateZoomScale * gestureZoomScale}
+	private var zoomScale: CGFloat { document.steadyStateZoomScale * gestureZoomScale }
 	private var panOffset: CGSize { (document.steadyStatePanOffset + gesturePanOffset) * zoomScale }
 	
 	init(board: Board) {
 		document = BoardDocument(board: board)
-		
-		
 	}
 	
 	private func zoomToFit() {
@@ -32,53 +29,73 @@ struct BoardView: View {
 	
 	var body: some View {
 		GeometryReader { geometry in
-			ZStack() {
-				ForEach(document.collections) { collection in
-					NoteCollectionView(document: document, collection: collection, zoomScale: zoomScale)
-						.transition(.opacity)
-						.position(self.position(for: collection, in: geometry.size))
-				}
-				
-				Button(action: {
-					print("new button pressed")
-					addNotePresented.toggle()
-				}, label: {
-					HStack {
-						FAText(iconName: "plus", size: 24)
-						Text("Create")
-							.font(.title2.bold())
+			NavigationView {
+				ZStack() {
+					ForEach(document.collections) { collection in
+						NoteCollectionView(document: document, collection: collection, zoomScale: zoomScale)
+							.transition(.opacity)
+							.position(self.position(for: collection, in: geometry.size))
 					}
 					
+					// Bottom Bar
+					HStack {
+						NavigationLink(destination: LogicBuilder()) {
+							HStack {
+								Image(systemName: "gearshape.2.fill")
+								Text("logic")
+							}
+						}
+						.BottomBarButton()
+						
+						Button(action: {
+							addNotePresented.toggle()
+						}, label: {
+							HStack {
+								Image(systemName: "plus")
+								Text("New note")
+							}
+						})
+						.BottomBarButton()
+					}
+					.padding()
+					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60, alignment: .trailing)
+					// This is a bit janky, but we move...
+					.position(x: geometry.size.width / 2, y: geometry.size.height - 100)
+					
+				}
+				.background(Color.white)
+				.onDrop(of: Board.Collection.Note.writableTypeIdentifiersForItemProvider, isTargeted: nil, perform: { providers, location in
+					var location = geometry.convert(location, from: .global)
+					location = CGPoint(x: location.x - geometry.size.width / 2, y: location.y - geometry.size.height / 2)
+					location = CGPoint(x: location.x - self.panOffset.width, y: location.y - self.panOffset.height)
+					location = CGPoint(x: location.x / self.zoomScale, y: location.y / self.zoomScale)
+					return self.drop(providers: providers, at: location)
 				})
-				.frame(width: 130, height: 60, alignment: .center)
-				.foregroundColor(.white)
-				.background(Color(white: 0.1))
-				.cornerRadius(30)
-				.position(x: geometry.size.width - 65, y: geometry.size.height - 30)
+				.gesture(self.doubleTapToZoom(in: geometry.size))
+				.onAppear {
+					zoomToFit(in: geometry.size)
+				}
+				.navigationTitle(document.boardTitle)
+				.navigationBarTitleDisplayMode(.inline)
+				.navigationBarItems(trailing: Button(action: {
+					print("yeet)")
+				}, label: {
+					Image(systemName: "ellipsis")
+						.foregroundColor(.black)
+				}))
 			}
-			.background(Color.white)
-			.onDrop(of: Board.Collection.Note.writableTypeIdentifiersForItemProvider, isTargeted: nil, perform: { providers, location in
-				var location = geometry.convert(location, from: .global)
-				location = CGPoint(x: location.x - geometry.size.width / 2, y: location.y - geometry.size.height / 2)
-				location = CGPoint(x: location.x - self.panOffset.width, y: location.y - self.panOffset.height)
-				location = CGPoint(x: location.x / self.zoomScale, y: location.y / self.zoomScale)
-				return self.drop(providers: providers, at: location)
-			})
-			.gesture(self.doubleTapToZoom(in: geometry.size))
-			.onAppear {
-				zoomToFit(in: geometry.size)
-			}
-		}
-		.gesture(self.panGesture())
-		.gesture(self.zoomGesture())
-		.edgesIgnoringSafeArea([.horizontal, .bottom])
-//		.onDrop(of: Note.writableTypeIdentifiersForItemProvider, delegate: self.boardVM)
-		.sheet(isPresented: $addNotePresented) {
-			NoteDetailView { newNoteContent in
-				document.addNote(newNoteContent)
-				addNotePresented.toggle()
-			} onCancel: {
-				addNotePresented.toggle()
+			.environmentObject(document)
+			.navigationViewStyle(StackNavigationViewStyle())
+			.gesture(self.panGesture())
+			.gesture(self.zoomGesture())
+			.edgesIgnoringSafeArea([.horizontal, .bottom])
+			.sheet(isPresented: $addNotePresented) {
+				NoteDetailView { newNoteContent in
+					document.addNote(newNoteContent)
+					addNotePresented.toggle()
+				} onCancel: {
+					addNotePresented.toggle()
+				}
 			}
 		}
 	}
@@ -115,14 +132,14 @@ struct BoardView: View {
 	private func zoomToFit(in size: CGSize) {
 		document.recenterCollections()
 		let bounds = document.boundingBox
-	
+		
 		let hZoom = bounds.width / size.width
 		let vZoom = bounds.height / size.height
 		
 		self.document.steadyStatePanOffset = .zero
 		
-//		print(1/hZoom, hZoom, 1/vZoom, vZoom)
-		self.document.steadyStateZoomScale = max(min(1/hZoom, hZoom), min(1/vZoom, vZoom)) * 0.9
+		//		print(1/hZoom, hZoom, 1/vZoom, vZoom)
+		self.document.steadyStateZoomScale = min(min(1/hZoom, hZoom), min(1/vZoom, vZoom)) * 0.9
 	}
 	
 	private func position(for collection: Board.Collection, in size: CGSize) -> CGPoint {

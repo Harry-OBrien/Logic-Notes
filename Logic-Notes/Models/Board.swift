@@ -32,6 +32,10 @@ struct Board: Codable {
 		return board
 	}
 	
+	struct Logic: Codable {
+		
+	}
+	
 	struct Collection: Identifiable, Codable {
 		
 		let id: Int

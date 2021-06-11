@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FASwiftUI
 
 struct NoteDetailView: View {
 	@State private var content = ""
@@ -52,7 +51,8 @@ struct NoteDetailView: View {
 							.font(.title2)
 					}
 					else {
-						FAText(iconName: "plus", size: 26.5)
+						Image(systemName: "plus")
+							.font(.title2)
 					}
 				})
 				.padding()

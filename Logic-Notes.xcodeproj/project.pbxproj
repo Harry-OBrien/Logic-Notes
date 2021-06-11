@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		163CB62E265435CA0065D551 /* BoardDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163CB62D265435CA0065D551 /* BoardDocument.swift */; };
+		1674667D266E470400D06FF9 /* LogicBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674667C266E470400D06FF9 /* LogicBuilder.swift */; };
 		16AAE96826541A87008343C4 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE96726541A87008343C4 /* BoardView.swift */; };
 		16AAE96D26541A88008343C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16AAE96C26541A88008343C4 /* Preview Assets.xcassets */; };
 		16AAE97826541A88008343C4 /* Logic_NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE97726541A88008343C4 /* Logic_NotesTests.swift */; };
@@ -16,16 +17,17 @@
 		16AAE996265420C2008343C4 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE995265420C2008343C4 /* NoteView.swift */; };
 		16AAE998265420D1008343C4 /* NoteCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE997265420D1008343C4 /* NoteCollectionView.swift */; };
 		16AAE99C26542174008343C4 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE99B26542174008343C4 /* Board.swift */; };
-		16BFAE402662E3E40087AAB2 /* FASwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 16BFAE3F2662E3E40087AAB2 /* FASwiftUI */; };
-		16BFAE442662E3F90087AAB2 /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = 16BFAE412662E3F90087AAB2 /* Font Awesome 5 Free-Solid-900.otf */; };
-		16BFAE452662E3F90087AAB2 /* Font Awesome 5 Free-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 16BFAE422662E3F90087AAB2 /* Font Awesome 5 Free-Regular-400.otf */; };
-		16BFAE462662E3F90087AAB2 /* Font Awesome 5 Brands-Regular-400.otf in Resources */ = {isa = PBXBuildFile; fileRef = 16BFAE432662E3F90087AAB2 /* Font Awesome 5 Brands-Regular-400.otf */; };
-		16BFAE482662E5F00087AAB2 /* icons.json in Resources */ = {isa = PBXBuildFile; fileRef = 16BFAE472662E5F00087AAB2 /* icons.json */; };
+		16BA32C72670D4DC00BE4835 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA32C62670D4DC00BE4835 /* GridLayout.swift */; };
+		16BA32C92670D4E500BE4835 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA32C82670D4E500BE4835 /* Grid.swift */; };
+		16BA32CC2670D51A00BE4835 /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA32CB2670D51A00BE4835 /* EditableText.swift */; };
 		16D884C026545832004A773A /* Logic_NotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE96526541A87008343C4 /* Logic_NotesApp.swift */; };
 		16D884C126545832004A773A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16AAE96926541A88008343C4 /* Assets.xcassets */; };
 		16DD234A2667D97500ECCED8 /* EmojiArtExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD23492667D97500ECCED8 /* EmojiArtExtensions.swift */; };
 		16DD23512668F57900ECCED8 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD23502668F57900ECCED8 /* Triangle.swift */; };
 		16DD23542668FB2900ECCED8 /* Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD23532668FB2900ECCED8 /* Hide.swift */; };
+		16DF216D266FBD51009661C2 /* BottomBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF216C266FBD51009661C2 /* BottomBarButton.swift */; };
+		16DF2170266FD51C009661C2 /* CrumpleBTrimmed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */; };
+		16DF2172266FD5C5009661C2 /* UnCrumpleBTrimmed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		163CB62D265435CA0065D551 /* BoardDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDocument.swift; sourceTree = "<group>"; };
+		1674667C266E470400D06FF9 /* LogicBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBuilder.swift; sourceTree = "<group>"; };
 		16AAE96226541A87008343C4 /* Logic-Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Logic-Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AAE96526541A87008343C4 /* Logic_NotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic_NotesApp.swift; sourceTree = "<group>"; };
 		16AAE96726541A87008343C4 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
@@ -63,13 +66,15 @@
 		16AAE995265420C2008343C4 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		16AAE997265420D1008343C4 /* NoteCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCollectionView.swift; sourceTree = "<group>"; };
 		16AAE99B26542174008343C4 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
-		16BFAE412662E3F90087AAB2 /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
-		16BFAE422662E3F90087AAB2 /* Font Awesome 5 Free-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Regular-400.otf"; sourceTree = "<group>"; };
-		16BFAE432662E3F90087AAB2 /* Font Awesome 5 Brands-Regular-400.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Brands-Regular-400.otf"; sourceTree = "<group>"; };
-		16BFAE472662E5F00087AAB2 /* icons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = icons.json; sourceTree = "<group>"; };
+		16BA32C62670D4DC00BE4835 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		16BA32C82670D4E500BE4835 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		16BA32CB2670D51A00BE4835 /* EditableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
 		16DD23492667D97500ECCED8 /* EmojiArtExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiArtExtensions.swift; sourceTree = "<group>"; };
 		16DD23502668F57900ECCED8 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		16DD23532668FB2900ECCED8 /* Hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hide.swift; sourceTree = "<group>"; };
+		16DF216C266FBD51009661C2 /* BottomBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarButton.swift; sourceTree = "<group>"; };
+		16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CrumpleBTrimmed.wav; sourceTree = "<group>"; };
+		16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = UnCrumpleBTrimmed.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16BFAE402662E3E40087AAB2 /* FASwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +128,7 @@
 				16DD23522668FB1900ECCED8 /* ViewModifiers */,
 				16DD234F2668F56D00ECCED8 /* Shapes */,
 				16AAE98C2666B86D0072E182 /* Extensions */,
+				16BA32CA2670D4EE00BE4835 /* Layouts */,
 				16AAE99226541B3B008343C4 /* Models */,
 				16AAE96B26541A88008343C4 /* Preview Content */,
 				16AAE99026541B22008343C4 /* Supporting Files */,
@@ -170,10 +175,8 @@
 		16AAE99026541B22008343C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				16BFAE472662E5F00087AAB2 /* icons.json */,
-				16BFAE432662E3F90087AAB2 /* Font Awesome 5 Brands-Regular-400.otf */,
-				16BFAE422662E3F90087AAB2 /* Font Awesome 5 Free-Regular-400.otf */,
-				16BFAE412662E3F90087AAB2 /* Font Awesome 5 Free-Solid-900.otf */,
+				16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */,
+				16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */,
 				16AAE96526541A87008343C4 /* Logic_NotesApp.swift */,
 				16AAE96926541A88008343C4 /* Assets.xcassets */,
 				16AAE96E26541A88008343C4 /* Info.plist */,
@@ -184,10 +187,13 @@
 		16AAE99126541B35008343C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				16BA32CB2670D51A00BE4835 /* EditableText.swift */,
+				16BA32C82670D4E500BE4835 /* Grid.swift */,
 				16AAE96726541A87008343C4 /* BoardView.swift */,
 				16AAE997265420D1008343C4 /* NoteCollectionView.swift */,
 				16AAE995265420C2008343C4 /* NoteView.swift */,
 				16AAE98F2666CFAC0072E182 /* NoteDetailView.swift */,
+				1674667C266E470400D06FF9 /* LogicBuilder.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -208,6 +214,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		16BA32CA2670D4EE00BE4835 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				16BA32C62670D4DC00BE4835 /* GridLayout.swift */,
+			);
+			path = Layouts;
+			sourceTree = "<group>";
+		};
 		16DD234F2668F56D00ECCED8 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				16DD23532668FB2900ECCED8 /* Hide.swift */,
+				16DF216C266FBD51009661C2 /* BottomBarButton.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -241,7 +256,6 @@
 			);
 			name = "Logic-Notes";
 			packageProductDependencies = (
-				16BFAE3F2662E3E40087AAB2 /* FASwiftUI */,
 			);
 			productName = "Logic-Notes";
 			productReference = 16AAE96226541A87008343C4 /* Logic-Notes.app */;
@@ -315,7 +329,6 @@
 			);
 			mainGroup = 16AAE95926541A87008343C4;
 			packageReferences = (
-				16BFAE3E2662E3E40087AAB2 /* XCRemoteSwiftPackageReference "FASwiftUI" */,
 			);
 			productRefGroup = 16AAE96326541A87008343C4 /* Products */;
 			projectDirPath = "";
@@ -333,12 +346,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16BFAE482662E5F00087AAB2 /* icons.json in Resources */,
-				16BFAE462662E3F90087AAB2 /* Font Awesome 5 Brands-Regular-400.otf in Resources */,
-				16BFAE442662E3F90087AAB2 /* Font Awesome 5 Free-Solid-900.otf in Resources */,
-				16BFAE452662E3F90087AAB2 /* Font Awesome 5 Free-Regular-400.otf in Resources */,
+				16DF2172266FD5C5009661C2 /* UnCrumpleBTrimmed.wav in Resources */,
 				16D884C126545832004A773A /* Assets.xcassets in Resources */,
 				16AAE96D26541A88008343C4 /* Preview Assets.xcassets in Resources */,
+				16DF2170266FD51C009661C2 /* CrumpleBTrimmed.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,12 +374,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1674667D266E470400D06FF9 /* LogicBuilder.swift in Sources */,
 				16AAE998265420D1008343C4 /* NoteCollectionView.swift in Sources */,
 				163CB62E265435CA0065D551 /* BoardDocument.swift in Sources */,
 				16DD234A2667D97500ECCED8 /* EmojiArtExtensions.swift in Sources */,
 				16DD23512668F57900ECCED8 /* Triangle.swift in Sources */,
+				16BA32C92670D4E500BE4835 /* Grid.swift in Sources */,
 				16AAE96826541A87008343C4 /* BoardView.swift in Sources */,
+				16BA32C72670D4DC00BE4835 /* GridLayout.swift in Sources */,
+				16DF216D266FBD51009661C2 /* BottomBarButton.swift in Sources */,
 				16DD23542668FB2900ECCED8 /* Hide.swift in Sources */,
+				16BA32CC2670D51A00BE4835 /* EditableText.swift in Sources */,
 				16AAE99C26542174008343C4 /* Board.swift in Sources */,
 				16AAE996265420C2008343C4 /* NoteView.swift in Sources */,
 				16AAE9902666CFAC0072E182 /* NoteDetailView.swift in Sources */,
@@ -459,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -514,7 +530,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -534,7 +550,7 @@
 				DEVELOPMENT_TEAM = 7J4MTS4TFB;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Logic-Notes/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -556,7 +572,7 @@
 				DEVELOPMENT_TEAM = 7J4MTS4TFB;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Logic-Notes/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -576,7 +592,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7J4MTS4TFB;
 				INFOPLIST_FILE = "Logic-NotesTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -598,7 +614,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7J4MTS4TFB;
 				INFOPLIST_FILE = "Logic-NotesTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -692,25 +708,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		16BFAE3E2662E3E40087AAB2 /* XCRemoteSwiftPackageReference "FASwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mattmaddux/FASwiftUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		16BFAE3F2662E3E40087AAB2 /* FASwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 16BFAE3E2662E3E40087AAB2 /* XCRemoteSwiftPackageReference "FASwiftUI" */;
-			productName = FASwiftUI;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 16AAE95A26541A87008343C4 /* Project object */;
 }

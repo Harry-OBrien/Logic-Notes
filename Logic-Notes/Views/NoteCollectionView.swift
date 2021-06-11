@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import FASwiftUI
 
 struct NoteCollectionView: View {
 	
@@ -14,6 +13,7 @@ struct NoteCollectionView: View {
 	let collection: Board.Collection
 	
 	@State private var showOptions = false
+	@FocusState private var editingCollectionTitle: Bool
 	
 	private var notes: [Board.Collection.Note] {
 		collection.notes
@@ -23,14 +23,13 @@ struct NoteCollectionView: View {
 		collection.locked
 	}
 	
-	// Colours
+	// MARK: Colours
 	private let backgroundColour = Color(white:237/255)
 	private let accentColour = Color(white: 196/255)
 	private let highlightColour = Color(white: 160/255)
 	private let lockedHighlightColour = Color(red: 215/255, green: 58/255, blue: 74/255)
 	
-	
-	// Sizing
+	// MARK: Sizing
 	private let baseSize = CGSize(width: 200, height: 200)
 	var zoomScale: CGFloat
 	private var size: CGSize {
@@ -41,12 +40,12 @@ struct NoteCollectionView: View {
 				return CGSize(width: width, height: baseSize.height)
 			}
 			
-			// Only 1 note, return the base size
+			// Only 1 note: return the base size
 			return baseSize
 		}
 	}
 	
-	// Drag
+	// MARK: Drag
 	@GestureState private var gestureDragOffset: CGSize = .zero
 	@State private var dragging = false
 	
@@ -71,25 +70,34 @@ struct NoteCollectionView: View {
 			}
 	}
 	
+	@State var text = ""
+	
+	// MARK: Body
 	var body: some View {
 		VStack(alignment: .center, spacing: 0) {
 			optionsStack(locked: collection.locked,
 						 onToggle: { document.toggleCollectionLocked(collection) },
-						 onDelete: { document.removeCollection(collection) })
+						 onDelete: { document.removeCollection(collection) },
+						 editing: $editingCollectionTitle
+			)
 				.Hide(!showOptions)
 			
 			// Collection Header
-			Text(collection.title)
-				.padding()
-				.font(Font.title)
-				.frame(minWidth: 180, minHeight: 60, maxHeight: 60, alignment: .center)
-				.background(showOptions || dragging ? highlightColour : backgroundColour)
-				.cornerRadius(30)
-				.overlay(RoundedRectangle(cornerRadius: 30)
-							.stroke(dragging && locked ? lockedHighlightColour : accentColour))
-				.offset(y: 30)
-				.zIndex(1.0)
-				.fixedSize()
+			EditableText(collection.title, focused: $editingCollectionTitle) { name in
+				document.renameCollection(collection, to: name)
+				editingCollectionTitle = false
+				showOptions = false
+			}
+			.padding()
+			.font(Font.title)
+			.frame(minWidth: 180, minHeight: 60, maxHeight: 60, alignment: .center)
+			.background(showOptions || dragging ? highlightColour : backgroundColour)
+			.cornerRadius(30)
+			.overlay(RoundedRectangle(cornerRadius: 30)
+						.stroke(dragging && locked ? lockedHighlightColour : accentColour))
+			.offset(y: 30)
+			.zIndex(1.0)
+			.fixedSize()
 			
 			// Note Container
 			HStack {
@@ -98,9 +106,6 @@ struct NoteCollectionView: View {
 						.onDrag {
 							NSItemProvider(object: note)
 						}
-//						.onTapGesture {
-//
-//						}
 				}
 			}
 			.frame(width: size.width, height: size.height, alignment: .center)
@@ -119,49 +124,103 @@ struct NoteCollectionView: View {
 			self.showOptions.toggle()
 		}
 		.onDrop(of: Board.Collection.Note.writableTypeIdentifiersForItemProvider, isTargeted: nil, perform: { providers, _ in
-					self.drop(providers: providers)
+			self.drop(providers: providers)
 		})
 	}
 	
+	// MARK: Drop
+	private func drop(providers: [NSItemProvider]) -> Bool {
+		let found = providers.loadFirstObject(ofType: Board.Collection.Note.self) { note in
+			document.moveNote(note, to: collection)
+		}
+		
+		return found
+	}
+	
+	// MARK: Options Stack
 	struct optionsStack: View {
 		var locked: Bool
 		var onToggle: () -> Void
 		var onDelete: () -> Void
 		
-		private let iconSize: CGFloat = 32
+		@State var showDeleteAlert = false
+		var editing: FocusState<Bool>.Binding
 		
 		var body: some View {
 			VStack(alignment: .center, spacing: 0) {
-				HStack (spacing: 50) {
+				HStack (spacing: 10) {
 					Button(action: {
-						withAnimation {
-							onDelete()
-						}
+						showDeleteAlert = true
 					}, label: {
-						FAText(iconName: "trash-alt", size: iconSize)
+						Image(systemName: "trash")
+							.font(.title)
+							.alert(isPresented: $showDeleteAlert) {
+								Alert(title: Text("Delete collection?"),
+									  message: Text("Are you sure you want to delete this collection"),
+									  primaryButton: .cancel(),
+									  secondaryButton: .destructive(Text("Delete")) {
+									withAnimation {
+										onDelete();
+									}
+								}
+								)
+							}
 					})
+					
+					Divider().background(Color.white)
 					
 					Button(action: {
 						onToggle()
 					}, label: {
 						Group {
 							if locked {
-								FAText(iconName: "lock", size: iconSize)
+								Image(systemName: "lock.fill")
+									.font(.title)
 							}
 							else {
-								FAText(iconName: "unlock", size: iconSize)
+								Image(systemName: "lock.open.fill")
+									.font(.title)
 							}
 						}
 					})
 					
+					Divider().background(Color.white)
+					
 					Button(action: {
 						print("edit btn pressed")
+						editing.wrappedValue = true
+						
 					}, label: {
-						FAText(iconName: "pencil-alt", size: iconSize)
+						Image(systemName: "pencil")
+							.font(.title)
 					})
+					
+					Divider().background(Color.white)
+					
+					Button(action: {
+						print("freeform pressed")
+					}, label: {
+						Image("icon-layout-freeform")
+							.font(.title)
+					})
+					
+					Button(action: {
+						print("snaptogrid pressed")
+					}, label: {
+						Image("icon-layout-snaptogrid")
+							.font(.title)
+					})
+					
+					Button(action: {
+						print("snap pressed")
+					}, label: {
+						Image("icon-layout-autolayout")
+							.font(.title)
+					})
+					
 				}
 				.foregroundColor(Color(white: 245/255))
-				.frame(width: 210, height: 60, alignment: .center)
+				.frame(width: 300, height: 60, alignment: .center) //210
 				.background(Color(white: 44/255))
 				.cornerRadius(6)
 				
@@ -172,13 +231,5 @@ struct NoteCollectionView: View {
 			.offset(y: 30)
 			.zIndex(1.0)
 		}
-	}
-	
-	private func drop(providers: [NSItemProvider]) -> Bool {
-		let found = providers.loadFirstObject(ofType: Board.Collection.Note.self) { note in
-			document.moveNote(note, to: collection)
-		}
-		
-		return found
 	}
 }
