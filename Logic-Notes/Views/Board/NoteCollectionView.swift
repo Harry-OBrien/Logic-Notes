@@ -75,13 +75,6 @@ struct NoteCollectionView: View {
 	// MARK: Body
 	var body: some View {
 		VStack(alignment: .center, spacing: 0) {
-			optionsStack(locked: collection.locked,
-						 onToggle: { document.toggleCollectionLocked(collection) },
-						 onDelete: { document.removeCollection(collection) },
-						 editing: $editingCollectionTitle
-			)
-				.Hide(!showOptions)
-			
 			// Collection Header
 			EditableText(collection.title, focused: $editingCollectionTitle) { name in
 				document.renameCollection(collection, to: name)
@@ -126,6 +119,13 @@ struct NoteCollectionView: View {
 		.onDrop(of: Board.Collection.Note.writableTypeIdentifiersForItemProvider, isTargeted: nil, perform: { providers, _ in
 			self.drop(providers: providers)
 		})
+		.popover(isPresented: $showOptions) {
+			OptionsStack(locked: collection.locked,
+						 onToggle: { document.toggleCollectionLocked(collection) },
+						 onDelete: { document.removeCollection(collection) },
+						 editing: $editingCollectionTitle
+			)
+		}
 	}
 	
 	// MARK: Drop
@@ -138,7 +138,7 @@ struct NoteCollectionView: View {
 	}
 	
 	// MARK: Options Stack
-	struct optionsStack: View {
+	struct OptionsStack: View {
 		var locked: Bool
 		var onToggle: () -> Void
 		var onDelete: () -> Void
@@ -147,89 +147,81 @@ struct NoteCollectionView: View {
 		var editing: FocusState<Bool>.Binding
 		
 		var body: some View {
-			VStack(alignment: .center, spacing: 0) {
-				HStack (spacing: 10) {
-					Button(action: {
-						showDeleteAlert = true
-					}, label: {
-						Image(systemName: "trash")
-							.font(.title)
-							.alert(isPresented: $showDeleteAlert) {
-								Alert(title: Text("Delete collection?"),
-									  message: Text("Are you sure you want to delete this collection"),
-									  primaryButton: .cancel(),
-									  secondaryButton: .destructive(Text("Delete")) {
-									withAnimation {
-										onDelete();
-									}
+			HStack (spacing: 10) {
+				Button(action: {
+					showDeleteAlert = true
+				}, label: {
+					Image(systemName: "trash")
+						.font(.title)
+						.alert(isPresented: $showDeleteAlert) {
+							Alert(title: Text("Delete collection?"),
+								  message: Text("Are you sure you want to delete this collection"),
+								  primaryButton: .cancel(),
+								  secondaryButton: .destructive(Text("Delete")) {
+								withAnimation {
+									onDelete();
 								}
-								)
 							}
-					})
-					
-					Divider().background(Color.white)
-					
-					Button(action: {
-						onToggle()
-					}, label: {
-						Group {
-							if locked {
-								Image(systemName: "lock.fill")
-									.font(.title)
-							}
-							else {
-								Image(systemName: "lock.open.fill")
-									.font(.title)
-							}
+							)
 						}
-					})
-					
-					Divider().background(Color.white)
-					
-					Button(action: {
-						print("edit btn pressed")
-						editing.wrappedValue = true
-						
-					}, label: {
-						Image(systemName: "pencil")
-							.font(.title)
-					})
-					
-					Divider().background(Color.white)
-					
-					Button(action: {
-						print("freeform pressed")
-					}, label: {
-						Image("icon-layout-freeform")
-							.font(.title)
-					})
-					
-					Button(action: {
-						print("snaptogrid pressed")
-					}, label: {
-						Image("icon-layout-snaptogrid")
-							.font(.title)
-					})
-					
-					Button(action: {
-						print("snap pressed")
-					}, label: {
-						Image("icon-layout-autolayout")
-							.font(.title)
-					})
-					
-				}
-				.foregroundColor(Color(white: 245/255))
-				.frame(width: 300, height: 60, alignment: .center) //210
-				.background(Color(white: 44/255))
-				.cornerRadius(6)
+				})
 				
-				Triangle()
-					.fill(Color(white: 44/255))
-					.frame(width: 30, height: 15, alignment: .center)
+				Divider().background(Color.white)
+				
+				Button(action: {
+					onToggle()
+				}, label: {
+					Group {
+						if locked {
+							Image(systemName: "lock.fill")
+								.font(.title)
+						}
+						else {
+							Image(systemName: "lock.open.fill")
+								.font(.title)
+						}
+					}
+				})
+				
+				Divider().background(Color.white)
+				
+				Button(action: {
+					print("edit btn pressed")
+					editing.wrappedValue = true
+					
+				}, label: {
+					Image(systemName: "pencil")
+						.font(.title)
+				})
+				
+				Divider().background(Color.white)
+				
+				Button(action: {
+					print("freeform pressed")
+				}, label: {
+					Image("icon-layout-freeform")
+						.font(.title)
+				})
+				
+				Button(action: {
+					print("snaptogrid pressed")
+				}, label: {
+					Image("icon-layout-snaptogrid")
+						.font(.title)
+				})
+				
+				Button(action: {
+					print("snap pressed")
+				}, label: {
+					Image("icon-layout-autolayout")
+						.font(.title)
+				})
+				
 			}
-			.offset(y: 30)
-			.zIndex(1.0)
+			.foregroundColor(Color(white: 245/255))
+			.frame(width: 300, height: 60, alignment: .center) //210
+			.background(Color(white: 44/255))
+			.cornerRadius(6)
 		}
 	}
 }

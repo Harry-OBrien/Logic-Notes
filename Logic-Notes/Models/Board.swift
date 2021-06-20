@@ -11,7 +11,7 @@ import MobileCoreServices
 struct Board: Codable {
 	var title: String
 	var collections = [Collection]()
-	
+		
 	init(title: String?) {
 		if let title = title {
 			self.title = title
@@ -32,9 +32,6 @@ struct Board: Codable {
 		return board
 	}
 	
-	struct Logic: Codable {
-		
-	}
 	
 	struct Collection: Identifiable, Codable {
 		

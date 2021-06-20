@@ -23,10 +23,6 @@ struct BoardView: View {
 		document = BoardDocument(board: board)
 	}
 	
-	private func zoomToFit() {
-		
-	}
-	
 	var body: some View {
 		GeometryReader { geometry in
 			NavigationView {
@@ -39,23 +35,26 @@ struct BoardView: View {
 					
 					// Bottom Bar
 					HStack {
-						NavigationLink(destination: LogicBuilder()) {
-							HStack {
-								Image(systemName: "gearshape.2.fill")
-								Text("logic")
+						BottomBarButton {
+							NavigationLink(destination: LogicBuilder()
+											.navigationTitle("'\(document.boardTitle)' Logic")) {
+								HStack {
+									Image(systemName: "gearshape.2.fill")
+									Text("logic")
+								}
 							}
 						}
-						.BottomBarButton()
 						
-						Button(action: {
-							addNotePresented.toggle()
-						}, label: {
-							HStack {
-								Image(systemName: "plus")
-								Text("New note")
-							}
-						})
-						.BottomBarButton()
+						BottomBarButton {
+							Button(action: {
+								addNotePresented.toggle()
+							}, label: {
+								HStack {
+									Image(systemName: "plus")
+									Text("New note")
+								}
+							})
+						}
 					}
 					.padding()
 					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60, alignment: .trailing)
@@ -157,6 +156,21 @@ struct BoardView: View {
 		}
 		
 		return found
+	}
+	
+	private struct BottomBarButton<Content: View>: View {
+		@ViewBuilder var content: () -> Content
+		
+		var body: some View {
+			content()
+				.font(.title2.bold())
+				.fixedSize()
+				.padding()
+				.frame(height: 60, alignment: .center)
+				.foregroundColor(.white)
+				.background(Color(white: 0.1))
+				.cornerRadius(30)
+		}
 	}
 }
 

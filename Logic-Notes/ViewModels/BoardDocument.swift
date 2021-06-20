@@ -12,7 +12,7 @@ class BoardDocument: ObservableObject {
 	
 	@Published private var board: Board {
 		didSet {
-			print("JSON: \(board.json?.utf8 ?? "Empty")")
+//			print("JSON: \(board.json?.utf8 ?? "Empty")")
 		}
 	}
 	
@@ -101,9 +101,9 @@ class BoardDocument: ObservableObject {
 			board.collections[index].locked.toggle()
 			
 			// TODO: Warn user of deletion
-//			if board.collections[index].notes.count <= 0 && !board.collections[index].locked {
-//				removeCollection(collection)
-//			}
+			//			if board.collections[index].notes.count <= 0 && !board.collections[index].locked {
+			//				removeCollection(collection)
+			//			}
 		}
 	}
 	
@@ -145,6 +145,9 @@ class BoardDocument: ObservableObject {
 			board.collections[index].removeNote(note)
 		}
 	}
+	
+	// MARK: - Logic Builder
+	
 }
 
 extension Board.Collection {
