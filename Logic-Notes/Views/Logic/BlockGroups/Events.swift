@@ -31,7 +31,6 @@ struct SpritePressed: View {
 }
 
 struct BroadcastReceive: View {
-	
 	@State var index = 0
 	var body: some View {
 		StartBlock(shapeColour: eventColor) {
@@ -46,7 +45,6 @@ struct BroadcastReceive: View {
 }
 
 struct BroadcastSend: View {
-	
 	@State var index = 0
 	var body: some View {
 		InOutBlock(shapeColour: eventColor) {
@@ -61,7 +59,6 @@ struct BroadcastSend: View {
 }
 
 struct BroadcastSendAndWait: View {
-	
 	@State var index = 0
 	var body: some View {
 		InOutBlock(shapeColour: eventColor) {
