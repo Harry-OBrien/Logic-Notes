@@ -12,21 +12,26 @@ struct BooleanComparisonBlockShape: LogicBlockShape {
 		Path { path in
 			
 			let w = rect.width
-			let h = rect.height
+			let h = rect.height <= rect.width ? rect.height : rect.width
+			
+			let top = rect.midY - h/2
+			let mid = rect.midY
+			let btm = rect.midY + h/2
+			
 			
 			// Make sure we do not exceed the size of the rectangle
-			let borderRadius = min(w/2, h/2)
+			let cornerInset = h/2
+
+			path.move(to: CGPoint(x: cornerInset, y: top))
+			path.addLine(to: CGPoint(x: w - cornerInset, y: top))
 			
-			path.move(to: CGPoint(x: borderRadius, y: 0))
-			path.addLine(to: CGPoint(x: w - borderRadius, y: 0))
+			path.addLine(to: CGPoint(x: w, y: mid))
+			path.addLine(to: CGPoint(x: w - cornerInset, y: btm))
 			
-			path.addLine(to: CGPoint(x: w, y: h/2))
-			path.addLine(to: CGPoint(x: w - borderRadius, y: h))
+			path.addLine(to: CGPoint(x: cornerInset, y: btm))
 			
-			path.addLine(to: CGPoint(x: borderRadius, y: h))
-			
-			path.addLine(to: CGPoint(x: 0, y: h/2))
-			path.addLine(to: CGPoint(x: borderRadius, y: 0))
+			path.addLine(to: CGPoint(x: 0, y: mid))
+			path.addLine(to: CGPoint(x: cornerInset, y: top))
 		}
 	}
 }
@@ -34,7 +39,7 @@ struct BooleanComparisonBlockShape: LogicBlockShape {
 struct BooleanComparisonBlockShape_preview: PreviewProvider {
 	static var previews: some View {
 		BooleanComparisonBlockShape()
-			.frame(width: 160, height: 60, alignment: .center)
+			.frame(width: 300, height: 100, alignment: .center)
 			.foregroundColor(.blue)
 	}
 }

@@ -43,7 +43,6 @@
 		16DD234A2667D97500ECCED8 /* EmojiArtExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD23492667D97500ECCED8 /* EmojiArtExtensions.swift */; };
 		16DD23512668F57900ECCED8 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD23502668F57900ECCED8 /* Triangle.swift */; };
 		16DD23542668FB2900ECCED8 /* Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD23532668FB2900ECCED8 /* Hide.swift */; };
-		16DF216D266FBD51009661C2 /* BottomBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF216C266FBD51009661C2 /* BottomBarButton.swift */; };
 		16DF2170266FD51C009661C2 /* CrumpleBTrimmed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */; };
 		16DF2172266FD5C5009661C2 /* UnCrumpleBTrimmed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */; };
 		16FAC6882675277100B44022 /* Color+rgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC6872675277100B44022 /* Color+rgb.swift */; };
@@ -119,7 +118,6 @@
 		16DD23492667D97500ECCED8 /* EmojiArtExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiArtExtensions.swift; sourceTree = "<group>"; };
 		16DD23502668F57900ECCED8 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		16DD23532668FB2900ECCED8 /* Hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hide.swift; sourceTree = "<group>"; };
-		16DF216C266FBD51009661C2 /* BottomBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarButton.swift; sourceTree = "<group>"; };
 		16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CrumpleBTrimmed.wav; sourceTree = "<group>"; };
 		16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = UnCrumpleBTrimmed.wav; sourceTree = "<group>"; };
 		16FAC6872675277100B44022 /* Color+rgb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+rgb.swift"; sourceTree = "<group>"; };
@@ -336,7 +334,6 @@
 			isa = PBXGroup;
 			children = (
 				16DD23532668FB2900ECCED8 /* Hide.swift */,
-				16DF216C266FBD51009661C2 /* BottomBarButton.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -529,7 +526,6 @@
 				16BA32C72670D4DC00BE4835 /* GridLayout.swift in Sources */,
 				16BBAAD7267407210079932C /* Trigger.swift in Sources */,
 				16FAC6922675552700B44022 /* StartBlockShape.swift in Sources */,
-				16DF216D266FBD51009661C2 /* BottomBarButton.swift in Sources */,
 				16DD23542668FB2900ECCED8 /* Hide.swift in Sources */,
 				16FAC69D267558E700B44022 /* Motion.swift in Sources */,
 				1688C507267646ED003C50CD /* DoubleWrappingBlockShape.swift in Sources */,

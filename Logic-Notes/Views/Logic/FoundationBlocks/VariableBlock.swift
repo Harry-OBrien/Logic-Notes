@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VariableBlock<Content: View>: View {
+struct VariableBlock<Content>: View where Content: View {
 	
 	private let shapeColor: Color
 	private let borderColor: Color
@@ -39,9 +39,9 @@ struct VariableBlock<Content: View>: View {
 			content()
 				.padding(EdgeInsets(vertical: 4, horizontal: 8))
 				.foregroundColor(.white)
-				.font(.title3.bold())
+				.font(.title2.bold())
 		}
-		.frame(minWidth: 50, minHeight: 35, alignment: .center)
+		.frame(minWidth: 60, minHeight: 50, alignment: .center)
 		.fixedSize()
 	}
 }
@@ -52,6 +52,7 @@ struct VariableBlock_Previews: PreviewProvider {
 			VariableBlock(shapeColor: .blue) {
 				Text("x position")
 			}
+			
 		}
 	}
 }

@@ -113,9 +113,14 @@ struct ComponentListView: View {
 			}
 			
 			Section(header: Text("Control")) {
+				WaitSeconds(10)
+				RepeatNumTimes(10)
 				RepeatForever()
-				IfElse()
-				EndAll()
+				IfCondition()
+				IfElseCondition()
+				WaitUntilCondition()
+				RepeatUntilCondition()
+				End()
 			}
 			
 			

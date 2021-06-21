@@ -34,9 +34,9 @@ struct BooleanComparisonBlock<Content: View>: View {
 				).foregroundColor(shapeColor)
 			
 			content()
-				.padding(8)
+				.padding(EdgeInsets(vertical: 6, horizontal: 10))
 				.foregroundColor(.white)
-				.font(.body.bold())
+				.font(.title2.bold())
 		}
 		.frame(minWidth: 80, minHeight: 40, alignment: .center)
 		.fixedSize()
@@ -49,10 +49,10 @@ struct BooleanComparisonBlock_Previews: PreviewProvider {
 			BooleanComparisonBlock(shapeColor: .blue) {
 				HStack {
 					VariablePlaceholder(borderColor: .blue)
-						.padding(.leading, 26)
-					Text("=")
+						.padding(.leading, 14)
+					Text("==")
 					VariablePlaceholder(borderColor: .blue)
-						.padding(.trailing, 26)
+						.padding(.trailing, 14)
 				}
 			}
 			

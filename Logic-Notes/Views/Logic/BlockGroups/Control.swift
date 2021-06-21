@@ -9,6 +9,47 @@ import SwiftUI
 
 fileprivate let controlColor = Color(r: 0xff, g: 0xab, b: 0x19)
 
+struct WaitSeconds: View {
+	
+	var numSeconds: Int
+	
+	init(_ numSeconds: Int) {
+		self.numSeconds = numSeconds
+	}
+	
+	var body: some View {
+		InOutBlock(shapeColour: controlColor) {
+			HStack {
+				Text("wait")
+				VariablePlaceholder(borderColor: controlColor) {
+					Text("\(numSeconds)")
+				}
+				Text("seconds")
+			}
+		}
+	}
+}
+
+struct RepeatNumTimes: View {
+	
+	var repeatCount: Int
+	
+	init(_ repeatCount: Int) {
+		self.repeatCount = repeatCount
+	}
+	
+	var body: some View {
+		WrappingBlock(shapeColour: controlColor) {
+			HStack {
+				Text("repeat")
+				VariablePlaceholder(borderColor: controlColor) {
+					Text("\(repeatCount)")
+				}
+			}
+		}
+	}
+}
+
 struct RepeatForever: View {
 	var body: some View {
 		WrappingBlock(shapeColour: controlColor) {
@@ -17,30 +58,77 @@ struct RepeatForever: View {
 	}
 }
 
-struct EndAll: View {
-    var body: some View {
-		EndBlock(shapeColour: controlColor) {
-			Text("Stop All")
+struct IfCondition: View {
+	var body: some View {
+		WrappingBlock(shapeColour: controlColor) {
+			HStack {
+				Text("if")
+				BooleanComparisonPlaceholder(shapeColor: controlColor)
+				Text("then")
+			}
 		}
-    }
+	}
 }
 
-struct IfElse: View {
+struct IfElseCondition: View {
 	var body: some View {
-		DoubleWrappingBlock(shapeColour: controlColor) {
-			Text("if this")
-		} midContent: {
+		DoubleWrappingBlock(shapeColour: controlColor, topContent: {
+			Text("if")
+			//			BooleanComparisonPlaceholder(shapeColor: controlColor)
+		}, midContent: {
 			Text("else")
+		})
+	}
+}
+
+
+struct WaitUntilCondition: View {
+	var body: some View {
+		InOutBlock(shapeColour: controlColor) {
+			HStack {
+				Text("wait until")
+				BooleanComparisonPlaceholder(shapeColor: controlColor)
+			}
+		}
+	}
+}
+
+struct RepeatUntilCondition: View {
+	var body: some View {
+		WrappingBlock(shapeColour: controlColor) {
+			HStack {
+				Text("repeat until")
+				BooleanComparisonPlaceholder(shapeColor: controlColor)
+			}
+		}
+	}
+}
+
+
+struct End: View {
+	@State private var index = 0
+	
+	var body: some View {
+		EndBlock(shapeColour: controlColor) {
+			HStack {
+				Text("stop")
+				VariableSelectionBlock(shapeColor: controlColor, activeIndex: $index, selection: ["all", "this"])
+			}
 		}
 	}
 }
 
 struct Control_Previews: PreviewProvider {
-    static var previews: some View {
-		VStack(alignment: .leading, spacing: -10) {
+	static var previews: some View {
+		VStack(alignment: .leading) {
+			WaitSeconds(10)
+			RepeatNumTimes(10)
 			RepeatForever()
-			IfElse()
-			EndAll()
+			IfCondition()
+			IfElseCondition()
+			WaitUntilCondition()
+			RepeatUntilCondition()
+			End()
 		}
-    }
+	}
 }

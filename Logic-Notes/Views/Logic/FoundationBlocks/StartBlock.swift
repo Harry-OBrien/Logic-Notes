@@ -12,8 +12,25 @@ struct StartBlock<Content: View>: View {
 	let shapeColour: Color
 	@ViewBuilder var content: () -> Content
 	
+	private let block = StartBlockShape()
+	
 	var body: some View {
-		BaseBlock(shapeColour: shapeColour, block: StartBlockShape(), content: content)
+		ZStack(alignment: .leading) {
+			block
+				.overlay(
+					block
+						.stroke(shapeColour, lineWidth: 1)
+						.brightness(-0.15)
+				)
+				.foregroundColor(shapeColour)
+			
+			content()
+				.padding(EdgeInsets(vertical: 4, horizontal: 10))
+				.foregroundColor(.white)
+				.font(.title2.bold())
+		}
+		.frame(minWidth: 130, minHeight: 80, alignment: .leading)
+		.fixedSize()
 	}
 }
 

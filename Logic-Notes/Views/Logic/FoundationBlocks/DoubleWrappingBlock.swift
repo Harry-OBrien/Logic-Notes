@@ -27,14 +27,14 @@ struct DoubleWrappingBlock<Content: View>: View {
 				topContent()
 					.padding(4)
 					.foregroundColor(.white)
-					.font(.body.bold())
+					.font(.title2.bold())
 					.frame(maxWidth: .infinity, alignment: .leading)
 					.position(x: geometry.size.width / 2, y: block.topOffset / 2)
 				
 				midContent()
 					.padding(4)
 					.foregroundColor(.white)
-					.font(.body.bold())
+					.font(.title2.bold())
 					.frame(maxWidth: .infinity, alignment: .leading)
 					.position(x: geometry.size.width / 2, y: block.topOffset + block.upperGapHeight + block.topOffset/2)
 			}

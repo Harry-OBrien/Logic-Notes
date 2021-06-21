@@ -26,7 +26,7 @@ struct WrappingBlock<Content: View>: View {
 				content()
 					.padding(4)
 					.foregroundColor(.white)
-					.font(.body.bold())
+					.font(.title2.bold())
 					.frame(maxWidth: .infinity, alignment: .leading)
 					.position(x: geometry.size.width / 2, y: block.topOffset / 2)
 			}

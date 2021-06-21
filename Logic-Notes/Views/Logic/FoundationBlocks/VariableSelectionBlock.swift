@@ -49,7 +49,7 @@ struct VariableSelectionBlock: View {
 					.font(.body)
 			}
 			.foregroundColor(.white)
-			.font(.title3.bold())
+			.font(.title2.bold())
 			.padding(EdgeInsets(vertical: 4, horizontal: 8))
 		}
 		.frame(minWidth: 50, minHeight: 35, alignment: .center)

@@ -11,8 +11,7 @@ import SwiftUI
 struct BooleanComparisonPlaceholder: View {
 	
 	let shapeColor: Color
-
-	let block = BooleanComparisonBlockShape()
+	private let block = BooleanComparisonBlockShape()
 	
 	var body: some View {
 		ZStack(alignment: .center) {
