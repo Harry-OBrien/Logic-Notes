@@ -35,7 +35,7 @@ struct EditableText: View {
 	
 	private func callOnChangedIfChanged() {
 		if editableText != text {
-			onChanged(editableText)
+				onChanged(editableText)
 		}
 	}
 }

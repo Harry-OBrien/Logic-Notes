@@ -76,8 +76,13 @@ struct NoteCollectionView: View {
 	var body: some View {
 		VStack(alignment: .center, spacing: 0) {
 			// Collection Header
-			EditableText(collection.title, focused: $editingCollectionTitle) { name in
-				document.renameCollection(collection, to: name)
+			EditableText(collection.id, focused: $editingCollectionTitle) { name in
+				do {
+					try document.renameCollection(collection, to: name)
+				}
+				catch {
+					
+				}
 				editingCollectionTitle = false
 				showOptions = false
 			}
@@ -97,7 +102,7 @@ struct NoteCollectionView: View {
 				ForEach(notes) { note in
 					NoteView(noteText: note.text)
 						.onDrag {
-							NSItemProvider(object: note)
+							NSItemProvider(object: "\(self.collection.id):" + note.text as NSString)
 						}
 				}
 			}
@@ -116,13 +121,13 @@ struct NoteCollectionView: View {
 		.onTapGesture {
 			self.showOptions.toggle()
 		}
-		.onDrop(of: Board.Collection.Note.writableTypeIdentifiersForItemProvider, isTargeted: nil, perform: { providers, _ in
+		.onDrop(of: [.text], isTargeted: nil, perform: { providers, _ in
 			self.drop(providers: providers)
 		})
 		.popover(isPresented: $showOptions) {
 			OptionsStack(locked: collection.locked,
 						 onToggle: { document.toggleCollectionLocked(collection) },
-						 onDelete: { document.removeCollection(collection) },
+						 onDelete: { document.deleteCollection(collection) },
 						 editing: $editingCollectionTitle
 			)
 		}
@@ -130,15 +135,16 @@ struct NoteCollectionView: View {
 	
 	// MARK: Drop
 	private func drop(providers: [NSItemProvider]) -> Bool {
-		let found = providers.loadFirstObject(ofType: Board.Collection.Note.self) { note in
-			document.moveNote(note, to: collection)
+		let found = providers.loadFirstObject(ofType: String.self) { noteContent in
+			print(noteContent)
+			//			boardDocument.moveNote(...)
 		}
 		
 		return found
 	}
 	
 	// MARK: Options Stack
-	struct OptionsStack: View {
+	private struct OptionsStack: View {
 		var locked: Bool
 		var onToggle: () -> Void
 		var onDelete: () -> Void

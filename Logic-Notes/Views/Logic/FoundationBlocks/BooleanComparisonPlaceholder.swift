@@ -19,7 +19,7 @@ struct BooleanComparisonPlaceholder: View {
 				.foregroundColor(shapeColor)
 				.brightness(-0.15)
 		}
-		.frame(minWidth: 65, minHeight: 45, alignment: .center)
+		.frame(minWidth: 50, minHeight: 35, alignment: .center)
 		.fixedSize()
 	}
 }

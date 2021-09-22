@@ -7,39 +7,49 @@
 
 import SwiftUI
 
-struct DoubleWrappingBlock<Content: View>: View {
+struct DoubleWrappingBlock<TopContent: View, MidContent: View>: View {
 	
-	let shapeColour: Color
-	let block = DoubleWrappingBlockShape()
-	@ViewBuilder var topContent: () -> Content
-	@ViewBuilder var midContent: () -> Content
+	private let shapeColour: Color
+	@ViewBuilder private var topContent: () -> TopContent
+	@ViewBuilder private var midContent: () -> MidContent
+	
+	@State private var block = DoubleWrappingBlockShape()
+	
+	init(shapeColour: Color,
+		 topContent: @escaping () -> TopContent,
+		 midContent: @escaping () -> MidContent) {
+		self.shapeColour = shapeColour
+		self.topContent = topContent
+		self.midContent = midContent
+	}
 	
 	var body: some View {
-		GeometryReader { geometry in
-			ZStack(alignment: .leading) {
-				block
-					.overlay(
-						block
-							.stroke(shapeColour, lineWidth: 1)
-							.brightness(-0.15)
-					).foregroundColor(shapeColour)
-				
-				topContent()
-					.padding(4)
-					.foregroundColor(.white)
-					.font(.title2.bold())
-					.frame(maxWidth: .infinity, alignment: .leading)
-					.position(x: geometry.size.width / 2, y: block.topOffset / 2)
-				
-				midContent()
-					.padding(4)
-					.foregroundColor(.white)
-					.font(.title2.bold())
-					.frame(maxWidth: .infinity, alignment: .leading)
-					.position(x: geometry.size.width / 2, y: block.topOffset + block.upperGapHeight + block.topOffset/2)
-			}
+		ZStack(alignment: .topLeading) {
+			block
+				.overlay(
+					block
+						.stroke(shapeColour, lineWidth: 1)
+						.brightness(-0.15)
+				)
+				.foregroundColor(shapeColour)
+				.onAppear {
+					// TODO: Dynamic top bar height
+					block.topBarHeight = 55
+				}
+			
+			topContent()
+				.offset(y: block.notchRect.height)
+				.padding(4)
+				.foregroundColor(.white)
+				.font(.title2.bold())
+			
+			midContent()
+				.padding(4)
+				.foregroundColor(.white)
+				.font(.title2.bold())
+				.offset(y: block.topBarHeight + block.upperGapHeight + block.notchRect.height/2)
 		}
-		.frame(minWidth: 100, minHeight: 230, alignment: .leading)
+		.frame(minWidth: 100, minHeight: block.blockHeight, alignment: .leading)
 		.fixedSize()
 	}
 }
@@ -47,9 +57,13 @@ struct DoubleWrappingBlock<Content: View>: View {
 struct DoubleWrappingBlock_Previews: PreviewProvider {
 	static var previews: some View {
 		DoubleWrappingBlock(shapeColour: .blue) {
-			Text("if true then")
+			HStack {
+				Text("if")
+				BooleanComparisonPlaceholder(shapeColor: .blue)
+				Text("then")
+			}
 		} midContent: {
-			Text("else do this")
+			Text("else")
 		}
 	}
 }

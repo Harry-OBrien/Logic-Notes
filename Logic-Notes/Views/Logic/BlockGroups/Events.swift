@@ -22,16 +22,8 @@ struct FlagPressed: View {
     }
 }
 
-struct SpritePressed: View {
-	var body: some View {
-		StartBlock(shapeColour: eventColor) {
-			Text("when this sprite clicked")
-		}
-	}
-}
-
 struct BroadcastReceive: View {
-	@State var index = 0
+	@State var index: Int? = nil
 	var body: some View {
 		StartBlock(shapeColour: eventColor) {
 			HStack {
@@ -45,7 +37,8 @@ struct BroadcastReceive: View {
 }
 
 struct BroadcastSend: View {
-	@State var index = 0
+	@State var index: Int? = nil
+	
 	var body: some View {
 		InOutBlock(shapeColour: eventColor) {
 			HStack {
@@ -59,7 +52,7 @@ struct BroadcastSend: View {
 }
 
 struct BroadcastSendAndWait: View {
-	@State var index = 0
+	@State var index: Int? = nil
 	var body: some View {
 		InOutBlock(shapeColour: eventColor) {
 			HStack {
@@ -77,7 +70,6 @@ struct Events_Previews: PreviewProvider {
     static var previews: some View {
 		VStack {
 			FlagPressed()
-			SpritePressed()
 			BroadcastReceive()
 			BroadcastSend()
 			BroadcastSendAndWait()

@@ -9,8 +9,9 @@ import SwiftUI
 
 fileprivate let soundColor = Color(r: 0xb7, g: 0x63, b: 0xcb)
 
+/// Plays a sound
 struct PlaySound: View {
-	@State private var index = 1
+	@State private var index: Int? = nil
 	
     var body: some View {
 		InOutBlock(shapeColour: soundColor) {
@@ -18,12 +19,14 @@ struct PlaySound: View {
 				Text("play sound")
 				VariableSelectionBlock(shapeColor: soundColor,
 									   activeIndex: $index,
-									   selection: ["Meow", "Whistle", "Bell", "Tit-Slap"])
+									   selection: ["Meow", "Whistle", "Bell", "Air Horn"])
 				Text("until done")
 			}
 		}
     }
 }
+
+// TODO: Implement notifications/alerts as logic block
 
 struct Sound_Previews: PreviewProvider {
     static var previews: some View {

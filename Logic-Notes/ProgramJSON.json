@@ -1,0 +1,32 @@
+{
+	"id" : "BF7CD6FF-7321-4D70-BC13-51C211DEE30D",
+	"x" : 0,
+	"y" : 0,
+	"trigger" : {
+		"flagPressed" : {
+			
+		}
+	},
+	"code" : [
+		{
+			"id" : "82A020FD-874D-4316-BC89-14465890D42C",
+			"type" : "FlagPressed"
+		},
+		{
+			"referencedCollection" : "Collection 1",
+			"id" : "68700059-FFAD-4155-BEAB-CD523983008C",
+			"associatedValue" : 32,
+			"type" : "SetX"
+		},
+		{
+			"id" : "D1884009-2EB6-43E4-94CB-5A58C08FBEAE",
+			"type" : "SetY",
+			"associatedValue" : 128
+		},
+		{
+			"id" : "1EE3AC82-A3F7-413E-8C28-342AA0A6FF40",
+			"type" : "Say",
+			"associatedValue" : "Test program complete!"
+		}
+	]
+}

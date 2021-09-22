@@ -8,9 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		16028A16267D011E007E6EC3 /* VariableBlockShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16028A15267D011E007E6EC3 /* VariableBlockShape.swift */; };
+		1639944D26F8AE280098BBF2 /* MoveCollectionUserLogicBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639944C26F8AE280098BBF2 /* MoveCollectionUserLogicBuilderTests.swift */; };
+		1639944F26F91B900098BBF2 /* LogicBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639944E26F91B900098BBF2 /* LogicBlockType.swift */; };
+		1639945126F9FC460098BBF2 /* AnyLogicBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639945026F9FC460098BBF2 /* AnyLogicBlock.swift */; };
+		1639949F26FAAC280098BBF2 /* ProgramModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639949E26FAAC280098BBF2 /* ProgramModelTests.swift */; };
+		163994A326FAB4670098BBF2 /* ProgramJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 163994A226FAB4670098BBF2 /* ProgramJSON.json */; };
+		163994A426FAB4670098BBF2 /* ProgramJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 163994A226FAB4670098BBF2 /* ProgramJSON.json */; };
 		163CB62E265435CA0065D551 /* BoardDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163CB62D265435CA0065D551 /* BoardDocument.swift */; };
 		1644B1DD2676258500241DC1 /* WrappingBlockShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1644B1DC2676258500241DC1 /* WrappingBlockShape.swift */; };
 		1644B1DF26762BE800241DC1 /* WrappingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1644B1DE26762BE800241DC1 /* WrappingBlock.swift */; };
+		164D481C26F10B09008396FC /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164D481B26F10B09008396FC /* Collection.swift */; };
+		164D481E26F10B10008396FC /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164D481D26F10B10008396FC /* Note.swift */; };
+		164D482026F138B3008396FC /* BoardCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164D481F26F138B3008396FC /* BoardCollectionTests.swift */; };
 		16693E94267F83AB00EEBFED /* BooleanComparisonBlockShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16693E93267F83AB00EEBFED /* BooleanComparisonBlockShape.swift */; };
 		16693E96267F84B700EEBFED /* BooleanComparisonBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16693E95267F84B700EEBFED /* BooleanComparisonBlock.swift */; };
 		16693E98267F84C600EEBFED /* VariableBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16693E97267F84C600EEBFED /* VariableBlock.swift */; };
@@ -20,12 +29,16 @@
 		16693EA0267FAE4300EEBFED /* Looks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16693E9F267FAE4300EEBFED /* Looks.swift */; };
 		16693EA2267FB1D400EEBFED /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16693EA1267FB1D400EEBFED /* Sound.swift */; };
 		16693EA4267FB2A200EEBFED /* VariableSelectionBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16693EA3267FB2A200EEBFED /* VariableSelectionBlock.swift */; };
-		1674667D266E470400D06FF9 /* LogicBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674667C266E470400D06FF9 /* LogicBuilderView.swift */; };
+		1674667D266E470400D06FF9 /* LogicBoardContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1674667C266E470400D06FF9 /* LogicBoardContainerView.swift */; };
 		1688C505267646DB003C50CD /* DoubleWrappingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1688C504267646DB003C50CD /* DoubleWrappingBlock.swift */; };
 		1688C507267646ED003C50CD /* DoubleWrappingBlockShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1688C506267646ED003C50CD /* DoubleWrappingBlockShape.swift */; };
+		16951A252680EB7800837526 /* ListSeperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16951A242680EB7800837526 /* ListSeperator.swift */; };
+		16951A27268223C400837526 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16951A26268223C400837526 /* Operators.swift */; };
+		16951A292683698D00837526 /* ComponentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16951A282683698D00837526 /* ComponentListView.swift */; };
+		16951A2B268369BB00837526 /* LogicBuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16951A2A268369BB00837526 /* LogicBuilderView.swift */; };
+		16951A2D26836C2C00837526 /* BlockGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16951A2C26836C2C00837526 /* BlockGroups.swift */; };
 		16AAE96826541A87008343C4 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE96726541A87008343C4 /* BoardView.swift */; };
 		16AAE96D26541A88008343C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16AAE96C26541A88008343C4 /* Preview Assets.xcassets */; };
-		16AAE97826541A88008343C4 /* Logic_NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE97726541A88008343C4 /* Logic_NotesTests.swift */; };
 		16AAE98326541A88008343C4 /* Logic_NotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE98226541A88008343C4 /* Logic_NotesUITests.swift */; };
 		16AAE9902666CFAC0072E182 /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE98F2666CFAC0072E182 /* NoteDetailView.swift */; };
 		16AAE996265420C2008343C4 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE995265420C2008343C4 /* NoteView.swift */; };
@@ -34,8 +47,7 @@
 		16BA32C72670D4DC00BE4835 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA32C62670D4DC00BE4835 /* GridLayout.swift */; };
 		16BA32C92670D4E500BE4835 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA32C82670D4E500BE4835 /* Grid.swift */; };
 		16BA32CC2670D51A00BE4835 /* EditableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BA32CB2670D51A00BE4835 /* EditableText.swift */; };
-		16BBAAD52673FDAC0079932C /* Logic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBAAD42673FDAC0079932C /* Logic.swift */; };
-		16BBAAD7267407210079932C /* Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBAAD6267407210079932C /* Trigger.swift */; };
+		16BBAAD52673FDAC0079932C /* LogicBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBAAD42673FDAC0079932C /* LogicBlock.swift */; };
 		16BBAAD92674CCF80079932C /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBAAD82674CCF80079932C /* RoundedCorners.swift */; };
 		16BBAADF2674CE970079932C /* StartBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16BBAADE2674CE970079932C /* StartBlock.swift */; };
 		16D884C026545832004A773A /* Logic_NotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AAE96526541A87008343C4 /* Logic_NotesApp.swift */; };
@@ -45,6 +57,10 @@
 		16DD23542668FB2900ECCED8 /* Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD23532668FB2900ECCED8 /* Hide.swift */; };
 		16DF2170266FD51C009661C2 /* CrumpleBTrimmed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */; };
 		16DF2172266FD5C5009661C2 /* UnCrumpleBTrimmed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */; };
+		16DF9571269B106C0070845B /* LogicToBoardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF9570269B106C0070845B /* LogicToBoardInterface.swift */; };
+		16DF9574269C74330070845B /* LogicBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF9573269C74330070845B /* LogicBlockProtocol.swift */; };
+		16DF9576269C8DCE0070845B /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF9575269C8DCE0070845B /* Program.swift */; };
+		16DF957A269DBBDC0070845B /* ProgramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF9579269DBBDC0070845B /* ProgramView.swift */; };
 		16FAC6882675277100B44022 /* Color+rgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC6872675277100B44022 /* Color+rgb.swift */; };
 		16FAC68B26753D5A00B44022 /* InOutBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC68A26753D5A00B44022 /* InOutBlock.swift */; };
 		16FAC68E267540E800B44022 /* LogicBlockShapeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC68D267540E800B44022 /* LogicBlockShapeProtocol.swift */; };
@@ -77,9 +93,17 @@
 
 /* Begin PBXFileReference section */
 		16028A15267D011E007E6EC3 /* VariableBlockShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableBlockShape.swift; sourceTree = "<group>"; };
+		1639944C26F8AE280098BBF2 /* MoveCollectionUserLogicBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCollectionUserLogicBuilderTests.swift; sourceTree = "<group>"; };
+		1639944E26F91B900098BBF2 /* LogicBlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBlockType.swift; sourceTree = "<group>"; };
+		1639945026F9FC460098BBF2 /* AnyLogicBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLogicBlock.swift; sourceTree = "<group>"; };
+		1639949E26FAAC280098BBF2 /* ProgramModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramModelTests.swift; sourceTree = "<group>"; };
+		163994A226FAB4670098BBF2 /* ProgramJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ProgramJSON.json; sourceTree = "<group>"; };
 		163CB62D265435CA0065D551 /* BoardDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardDocument.swift; sourceTree = "<group>"; };
 		1644B1DC2676258500241DC1 /* WrappingBlockShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingBlockShape.swift; sourceTree = "<group>"; };
 		1644B1DE26762BE800241DC1 /* WrappingBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingBlock.swift; sourceTree = "<group>"; };
+		164D481B26F10B09008396FC /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		164D481D26F10B10008396FC /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		164D481F26F138B3008396FC /* BoardCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardCollectionTests.swift; sourceTree = "<group>"; };
 		16693E93267F83AB00EEBFED /* BooleanComparisonBlockShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanComparisonBlockShape.swift; sourceTree = "<group>"; };
 		16693E95267F84B700EEBFED /* BooleanComparisonBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanComparisonBlock.swift; sourceTree = "<group>"; };
 		16693E97267F84C600EEBFED /* VariableBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableBlock.swift; sourceTree = "<group>"; };
@@ -89,9 +113,14 @@
 		16693E9F267FAE4300EEBFED /* Looks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Looks.swift; sourceTree = "<group>"; };
 		16693EA1267FB1D400EEBFED /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		16693EA3267FB2A200EEBFED /* VariableSelectionBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableSelectionBlock.swift; sourceTree = "<group>"; };
-		1674667C266E470400D06FF9 /* LogicBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBuilderView.swift; sourceTree = "<group>"; };
+		1674667C266E470400D06FF9 /* LogicBoardContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBoardContainerView.swift; sourceTree = "<group>"; };
 		1688C504267646DB003C50CD /* DoubleWrappingBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleWrappingBlock.swift; sourceTree = "<group>"; };
 		1688C506267646ED003C50CD /* DoubleWrappingBlockShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleWrappingBlockShape.swift; sourceTree = "<group>"; };
+		16951A242680EB7800837526 /* ListSeperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSeperator.swift; sourceTree = "<group>"; };
+		16951A26268223C400837526 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		16951A282683698D00837526 /* ComponentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentListView.swift; sourceTree = "<group>"; };
+		16951A2A268369BB00837526 /* LogicBuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBuilderView.swift; sourceTree = "<group>"; };
+		16951A2C26836C2C00837526 /* BlockGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockGroups.swift; sourceTree = "<group>"; };
 		16AAE96226541A87008343C4 /* Logic-Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Logic-Notes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AAE96526541A87008343C4 /* Logic_NotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic_NotesApp.swift; sourceTree = "<group>"; };
 		16AAE96726541A87008343C4 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
@@ -99,7 +128,6 @@
 		16AAE96C26541A88008343C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		16AAE96E26541A88008343C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16AAE97326541A88008343C4 /* Logic-NotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic-NotesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		16AAE97726541A88008343C4 /* Logic_NotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic_NotesTests.swift; sourceTree = "<group>"; };
 		16AAE97926541A88008343C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16AAE97E26541A88008343C4 /* Logic-NotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Logic-NotesUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16AAE98226541A88008343C4 /* Logic_NotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic_NotesUITests.swift; sourceTree = "<group>"; };
@@ -111,8 +139,7 @@
 		16BA32C62670D4DC00BE4835 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		16BA32C82670D4E500BE4835 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		16BA32CB2670D51A00BE4835 /* EditableText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditableText.swift; sourceTree = "<group>"; };
-		16BBAAD42673FDAC0079932C /* Logic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logic.swift; sourceTree = "<group>"; };
-		16BBAAD6267407210079932C /* Trigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trigger.swift; sourceTree = "<group>"; };
+		16BBAAD42673FDAC0079932C /* LogicBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBlock.swift; sourceTree = "<group>"; };
 		16BBAAD82674CCF80079932C /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		16BBAADE2674CE970079932C /* StartBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartBlock.swift; sourceTree = "<group>"; };
 		16DD23492667D97500ECCED8 /* EmojiArtExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiArtExtensions.swift; sourceTree = "<group>"; };
@@ -120,6 +147,10 @@
 		16DD23532668FB2900ECCED8 /* Hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hide.swift; sourceTree = "<group>"; };
 		16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CrumpleBTrimmed.wav; sourceTree = "<group>"; };
 		16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = UnCrumpleBTrimmed.wav; sourceTree = "<group>"; };
+		16DF9570269B106C0070845B /* LogicToBoardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicToBoardInterface.swift; sourceTree = "<group>"; };
+		16DF9573269C74330070845B /* LogicBlockProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBlockProtocol.swift; sourceTree = "<group>"; };
+		16DF9575269C8DCE0070845B /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
+		16DF9579269DBBDC0070845B /* ProgramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramView.swift; sourceTree = "<group>"; };
 		16FAC6872675277100B44022 /* Color+rgb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+rgb.swift"; sourceTree = "<group>"; };
 		16FAC68A26753D5A00B44022 /* InOutBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InOutBlock.swift; sourceTree = "<group>"; };
 		16FAC68D267540E800B44022 /* LogicBlockShapeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBlockShapeProtocol.swift; sourceTree = "<group>"; };
@@ -166,6 +197,8 @@
 				16693EA1267FB1D400EEBFED /* Sound.swift */,
 				16FAC698267558D700B44022 /* Events.swift */,
 				16FAC69A267558DF00B44022 /* Control.swift */,
+				16951A26268223C400837526 /* Operators.swift */,
+				16951A2C26836C2C00837526 /* BlockGroups.swift */,
 			);
 			path = BlockGroups;
 			sourceTree = "<group>";
@@ -217,8 +250,10 @@
 		16AAE97626541A88008343C4 /* Logic-NotesTests */ = {
 			isa = PBXGroup;
 			children = (
-				16AAE97726541A88008343C4 /* Logic_NotesTests.swift */,
 				16AAE97926541A88008343C4 /* Info.plist */,
+				164D481F26F138B3008396FC /* BoardCollectionTests.swift */,
+				1639944C26F8AE280098BBF2 /* MoveCollectionUserLogicBuilderTests.swift */,
+				1639949E26FAAC280098BBF2 /* ProgramModelTests.swift */,
 			);
 			path = "Logic-NotesTests";
 			sourceTree = "<group>";
@@ -245,6 +280,7 @@
 		16AAE99026541B22008343C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				163994A226FAB4670098BBF2 /* ProgramJSON.json */,
 				16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */,
 				16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */,
 				16AAE96526541A87008343C4 /* Logic_NotesApp.swift */,
@@ -267,9 +303,8 @@
 		16AAE99226541B3B008343C4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				16AAE99B26542174008343C4 /* Board.swift */,
-				16BBAAD42673FDAC0079932C /* Logic.swift */,
-				16BBAAD6267407210079932C /* Trigger.swift */,
+				16DF9577269C8E600070845B /* Board */,
+				16DF9578269C8E7D0070845B /* Logic */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -278,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				163CB62D265435CA0065D551 /* BoardDocument.swift */,
+				16DF9570269B106C0070845B /* LogicToBoardInterface.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -306,7 +342,10 @@
 				166FF353267B5F520057594F /* BlockGroups */,
 				16FAC6972675587E00B44022 /* FoundationBlocks */,
 				16FAC68C267540D600B44022 /* BlockShapes */,
-				1674667C266E470400D06FF9 /* LogicBuilderView.swift */,
+				1674667C266E470400D06FF9 /* LogicBoardContainerView.swift */,
+				16DF9579269DBBDC0070845B /* ProgramView.swift */,
+				16951A2A268369BB00837526 /* LogicBuilderView.swift */,
+				16951A282683698D00837526 /* ComponentListView.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -334,8 +373,31 @@
 			isa = PBXGroup;
 			children = (
 				16DD23532668FB2900ECCED8 /* Hide.swift */,
+				16951A242680EB7800837526 /* ListSeperator.swift */,
 			);
 			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		16DF9577269C8E600070845B /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				16AAE99B26542174008343C4 /* Board.swift */,
+				164D481B26F10B09008396FC /* Collection.swift */,
+				164D481D26F10B10008396FC /* Note.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		16DF9578269C8E7D0070845B /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				16BBAAD42673FDAC0079932C /* LogicBlock.swift */,
+				1639945026F9FC460098BBF2 /* AnyLogicBlock.swift */,
+				16DF9573269C74330070845B /* LogicBlockProtocol.swift */,
+				16DF9575269C8DCE0070845B /* Program.swift */,
+				1639944E26F91B900098BBF2 /* LogicBlockType.swift */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 		16FAC68C267540D600B44022 /* BlockShapes */ = {
@@ -480,6 +542,7 @@
 			files = (
 				16DF2172266FD5C5009661C2 /* UnCrumpleBTrimmed.wav in Resources */,
 				16D884C126545832004A773A /* Assets.xcassets in Resources */,
+				163994A326FAB4670098BBF2 /* ProgramJSON.json in Resources */,
 				16AAE96D26541A88008343C4 /* Preview Assets.xcassets in Resources */,
 				16DF2170266FD51C009661C2 /* CrumpleBTrimmed.wav in Resources */,
 			);
@@ -489,6 +552,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				163994A426FAB4670098BBF2 /* ProgramJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,13 +572,16 @@
 			files = (
 				16FAC6942675557100B44022 /* EndBlock.swift in Sources */,
 				1644B1DF26762BE800241DC1 /* WrappingBlock.swift in Sources */,
-				1674667D266E470400D06FF9 /* LogicBuilderView.swift in Sources */,
+				1674667D266E470400D06FF9 /* LogicBoardContainerView.swift in Sources */,
 				16AAE998265420D1008343C4 /* NoteCollectionView.swift in Sources */,
+				16951A27268223C400837526 /* Operators.swift in Sources */,
 				1688C505267646DB003C50CD /* DoubleWrappingBlock.swift in Sources */,
 				16693E9C267F941000EEBFED /* VariablePlaceholder.swift in Sources */,
 				163CB62E265435CA0065D551 /* BoardDocument.swift in Sources */,
 				16DD234A2667D97500ECCED8 /* EmojiArtExtensions.swift in Sources */,
-				16BBAAD52673FDAC0079932C /* Logic.swift in Sources */,
+				1639944F26F91B900098BBF2 /* LogicBlockType.swift in Sources */,
+				164D481E26F10B10008396FC /* Note.swift in Sources */,
+				16BBAAD52673FDAC0079932C /* LogicBlock.swift in Sources */,
 				16FAC699267558D700B44022 /* Events.swift in Sources */,
 				16FAC6882675277100B44022 /* Color+rgb.swift in Sources */,
 				16693E96267F84B700EEBFED /* BooleanComparisonBlock.swift in Sources */,
@@ -522,26 +589,35 @@
 				16FAC69B267558DF00B44022 /* Control.swift in Sources */,
 				16BA32C92670D4E500BE4835 /* Grid.swift in Sources */,
 				16AAE96826541A87008343C4 /* BoardView.swift in Sources */,
+				16DF9574269C74330070845B /* LogicBlockProtocol.swift in Sources */,
 				16693E94267F83AB00EEBFED /* BooleanComparisonBlockShape.swift in Sources */,
+				164D481C26F10B09008396FC /* Collection.swift in Sources */,
 				16BA32C72670D4DC00BE4835 /* GridLayout.swift in Sources */,
-				16BBAAD7267407210079932C /* Trigger.swift in Sources */,
+				16951A252680EB7800837526 /* ListSeperator.swift in Sources */,
 				16FAC6922675552700B44022 /* StartBlockShape.swift in Sources */,
 				16DD23542668FB2900ECCED8 /* Hide.swift in Sources */,
+				16951A2D26836C2C00837526 /* BlockGroups.swift in Sources */,
 				16FAC69D267558E700B44022 /* Motion.swift in Sources */,
 				1688C507267646ED003C50CD /* DoubleWrappingBlockShape.swift in Sources */,
 				16693E98267F84C600EEBFED /* VariableBlock.swift in Sources */,
 				16BA32CC2670D51A00BE4835 /* EditableText.swift in Sources */,
 				16693EA0267FAE4300EEBFED /* Looks.swift in Sources */,
+				16951A292683698D00837526 /* ComponentListView.swift in Sources */,
+				16DF957A269DBBDC0070845B /* ProgramView.swift in Sources */,
 				1644B1DD2676258500241DC1 /* WrappingBlockShape.swift in Sources */,
 				16FAC6962675558A00B44022 /* EndBlockShape.swift in Sources */,
 				16693E9A267F937100EEBFED /* BooleanComparisonPlaceholder.swift in Sources */,
 				16693EA4267FB2A200EEBFED /* VariableSelectionBlock.swift in Sources */,
 				16028A16267D011E007E6EC3 /* VariableBlockShape.swift in Sources */,
 				16AAE99C26542174008343C4 /* Board.swift in Sources */,
+				1639945126F9FC460098BBF2 /* AnyLogicBlock.swift in Sources */,
 				16AAE996265420C2008343C4 /* NoteView.swift in Sources */,
 				16FAC68B26753D5A00B44022 /* InOutBlock.swift in Sources */,
 				16AAE9902666CFAC0072E182 /* NoteDetailView.swift in Sources */,
 				16BBAAD92674CCF80079932C /* RoundedCorners.swift in Sources */,
+				16DF9576269C8DCE0070845B /* Program.swift in Sources */,
+				16951A2B268369BB00837526 /* LogicBuilderView.swift in Sources */,
+				16DF9571269B106C0070845B /* LogicToBoardInterface.swift in Sources */,
 				16693EA2267FB1D400EEBFED /* Sound.swift in Sources */,
 				16FAC68E267540E800B44022 /* LogicBlockShapeProtocol.swift in Sources */,
 				16D884C026545832004A773A /* Logic_NotesApp.swift in Sources */,
@@ -556,7 +632,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16AAE97826541A88008343C4 /* Logic_NotesTests.swift in Sources */,
+				1639944D26F8AE280098BBF2 /* MoveCollectionUserLogicBuilderTests.swift in Sources */,
+				1639949F26FAAC280098BBF2 /* ProgramModelTests.swift in Sources */,
+				164D482026F138B3008396FC /* BoardCollectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

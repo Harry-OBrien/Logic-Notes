@@ -10,18 +10,27 @@ import SwiftUI
 struct DoubleWrappingBlockShape: LogicBlockShape {
 	
 	var leftOffset: CGFloat { notchRect.minX }
-	let topOffset: CGFloat = 45
-	var upperGapHeight: CGFloat = 45
-	var lowerGapHeight: CGFloat = 45
-	var bottomBarHeight: CGFloat = 45
+	var topBarHeight: CGFloat = 50
+	var upperGapHeight: CGFloat = 30
+	var midBarHeight: CGFloat = 50
+	var lowerGapHeight: CGFloat = 30
+	var bottomBarHeight: CGFloat = 30
+	
+	var blockHeight: CGFloat {
+		topBarHeight +
+		upperGapHeight +
+		midBarHeight +
+		lowerGapHeight +
+		bottomBarHeight
+	}
 	
 	func path(in rect: CGRect) -> Path {
 		let y0 = rect.minY
-		let y1 = rect.minY + topOffset
-		let y2 = rect.minY + topOffset + upperGapHeight
-		let y3 = rect.minY + topOffset + upperGapHeight + upperGapHeight
-		let y4 = rect.maxY - bottomBarHeight
-		let y5 = rect.maxY
+		let y1 = y0 + topBarHeight
+		let y2 = y1 + upperGapHeight
+		let y3 = y2 + midBarHeight
+		let y4 = y3 + lowerGapHeight
+		let y5 = y4 + bottomBarHeight
 		
 		var path = Path()
 		

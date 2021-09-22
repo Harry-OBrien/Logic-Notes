@@ -10,9 +10,14 @@ import SwiftUI
 struct StartBlock<Content: View>: View {
 	
 	let shapeColour: Color
-	@ViewBuilder var content: () -> Content
+	@ViewBuilder var content: Content
 	
 	private let block = StartBlockShape()
+	
+	init(shapeColour: Color, content: () -> Content) {
+		self.shapeColour = shapeColour
+		self.content = content()
+	}
 	
 	var body: some View {
 		ZStack(alignment: .leading) {
@@ -24,7 +29,7 @@ struct StartBlock<Content: View>: View {
 				)
 				.foregroundColor(shapeColour)
 			
-			content()
+			content
 				.padding(EdgeInsets(vertical: 4, horizontal: 10))
 				.foregroundColor(.white)
 				.font(.title2.bold())

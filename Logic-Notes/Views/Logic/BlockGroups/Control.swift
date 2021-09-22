@@ -39,7 +39,7 @@ struct RepeatNumTimes: View {
 	}
 	
 	var body: some View {
-		WrappingBlock(shapeColour: controlColor) {
+		WrappingBlock(shapeColour: controlColor, repeatingCode: true) {
 			HStack {
 				Text("repeat")
 				VariablePlaceholder(borderColor: controlColor) {
@@ -52,7 +52,7 @@ struct RepeatNumTimes: View {
 
 struct RepeatForever: View {
 	var body: some View {
-		WrappingBlock(shapeColour: controlColor) {
+		WrappingBlock(shapeColour: controlColor, repeatingCode: true) {
 			Text("forever")
 		}
 	}
@@ -95,7 +95,7 @@ struct WaitUntilCondition: View {
 
 struct RepeatUntilCondition: View {
 	var body: some View {
-		WrappingBlock(shapeColour: controlColor) {
+		WrappingBlock(shapeColour: controlColor, repeatingCode: true) {
 			HStack {
 				Text("repeat until")
 				BooleanComparisonPlaceholder(shapeColor: controlColor)
@@ -106,13 +106,13 @@ struct RepeatUntilCondition: View {
 
 
 struct End: View {
-	@State private var index = 0
+	@State private var index: Int? = 1
 	
 	var body: some View {
 		EndBlock(shapeColour: controlColor) {
 			HStack {
 				Text("stop")
-				VariableSelectionBlock(shapeColor: controlColor, activeIndex: $index, selection: ["all", "this"])
+				VariableSelectionBlock(shapeColor: controlColor, activeIndex: $index, selection: ["all", "this program"])
 			}
 		}
 	}

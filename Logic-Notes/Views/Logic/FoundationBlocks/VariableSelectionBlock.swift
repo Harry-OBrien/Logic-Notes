@@ -11,12 +11,12 @@ struct VariableSelectionBlock: View {
 	
 	private let shapeColor: Color
 	private let borderColor: Color
-	@Binding private var activeIndex: Int
+	@Binding private var activeIndex: Int?
 	private let selection: [String]
 	
 	@State private var showVariableOptions = false
 	
-	init(shapeColor: Color, borderColor: Color? = nil, activeIndex: Binding<Int>, selection: [String]) {
+	init(shapeColor: Color, borderColor: Color? = nil, activeIndex: Binding<Int?>, selection: [String]) {
 		self.shapeColor = shapeColor
 		self.borderColor = borderColor ?? shapeColor
 		self._activeIndex = activeIndex
@@ -24,6 +24,20 @@ struct VariableSelectionBlock: View {
 	}
 	
 	private let block = VariableBlockShape()
+	
+	private var selectedOption: some View {
+		if (activeIndex != nil &&
+			activeIndex! >= 0 &&
+			activeIndex! < selection.count)
+		{
+			return Text(selection[activeIndex!])
+		}
+		else
+		{
+			return Text("select")
+				.foregroundColor(.gray)
+		}
+	}
 	
 	var body: some View {
 		ZStack(alignment: .center) {
@@ -36,14 +50,8 @@ struct VariableSelectionBlock: View {
 				).foregroundColor(shapeColor)
 			
 			HStack {
-				Group {
-					if activeIndex >= 0 && activeIndex < selection.count {
-						Text(selection[activeIndex])
-					}
-					else {
-						Text("N/A")
-					}
-				}
+				selectedOption
+				
 				Image(systemName: "triangle.fill")
 					.rotationEffect(Angle(degrees: 180))
 					.font(.body)

@@ -5,19 +5,21 @@
 //  Created by Harry O'Brien on 18/05/2021.
 //
 
-import Foundation
 import SwiftUI
 
 class BoardDocument: ObservableObject {
 	
+	// TODO: Implement better setters and getters for collections so we don't have to do 'let index = ...; board.collections[index].notes = ...'
+	
 	@Published private var board: Board {
 		didSet {
-//			print("JSON: \(board.json?.utf8 ?? "Empty")")
+			//			print("JSON: \(board.json?.utf8 ?? "Empty")")
 		}
 	}
 	
 	var boardTitle: String { board.title }
 	var collections: [Board.Collection] { board.collections }
+	var associatedPrograms: [Program] { board.associatedPrograms }
 	
 	@Published var steadyStateZoomScale: CGFloat = 1.0
 	@Published var steadyStatePanOffset: CGSize = .zero
@@ -27,6 +29,7 @@ class BoardDocument: ObservableObject {
 		recenterCollections()
 	}
 	
+	// MARK: Board geometry
 	var boundingBox: CGRect {
 		var left = Int.max
 		var right = -Int.max
@@ -55,7 +58,6 @@ class BoardDocument: ObservableObject {
 		// Get current bounding box
 		let currentBounds = boundingBox
 		
-		
 		// average out locations
 		for (i, _) in collections.enumerated() {
 			board.collections[i].x -= Int(currentBounds.midX)
@@ -74,11 +76,14 @@ class BoardDocument: ObservableObject {
 	}
 	
 	// MARK: - Collection Intent(s)
-	@discardableResult
-	func addCollection(titled title: String?, at location: CGPoint) -> Int {
-		return board.addCollection(title: title, locked: false, x: Int(location.x), y: Int(location.y))
+	// Create, (Read), Update, Delete
+	/// Create
+	func createCollection(titled title: String?, at location: CGPoint) throws {
+		try board.addCollection(title: title, locked: false, x: Int(location.x), y: Int(location.y))
 	}
 	
+	// TODO: Redesign update functions to be cleaner
+	/// update
 	func moveCollection(_ collection: Board.Collection, by offset: CGSize) {
 		if let index = board.collections.firstIndex(matching: collection) {
 			board.collections[index].x += Int(offset.width)
@@ -86,16 +91,16 @@ class BoardDocument: ObservableObject {
 		}
 	}
 	
-	func renameCollection(_ collection: Board.Collection, to newTitle: String) {
-		if let index = board.collections.firstIndex(matching: collection) {
-			board.collections[index].title = newTitle
-		}
+	/// Update
+	func renameCollection(_ oldCollection: Board.Collection, to newTitle: String) throws {
+		// Try and create a new collection
+		try board.addCollection(title: newTitle, x: oldCollection.x, y: oldCollection.y)
+		
+		// Now delete the old collection
+		deleteCollection(oldCollection)
 	}
 	
-	func removeCollection(_ collection: Board.Collection) {
-		board.collections = board.collections.filter { $0.id != collection.id }
-	}
-	
+	/// update
 	func toggleCollectionLocked(_ collection: Board.Collection) {
 		if let index = board.collections.firstIndex(matching: collection) {
 			board.collections[index].locked.toggle()
@@ -107,47 +112,46 @@ class BoardDocument: ObservableObject {
 		}
 	}
 	
+	/// delete
+	func deleteCollection(_ collection: Board.Collection) {
+		board.collections = board.collections.filter { $0.id != collection.id }
+	}
+	
 	// MARK: - Note Intent(s)
-	func addNote(_ note: String, at location: CGPoint = CGPoint(x: 30, y: 30)) {
-		let index = addCollection(titled: nil, at: location)
-		board.collections[index].addNote(note)
-	}
+	// Create (Read) Update Delete
 	
-	func addNote(_ note: Board.Collection.Note, at location: CGPoint = CGPoint(x: 30, y: 30)) {
-		let index = addCollection(titled: nil, at: location)
-		moveNote(note, to: board.collections[index])
-	}
-	
-	func moveNote(_ note: Board.Collection.Note, to collection: Board.Collection) {
-		if let index = board.collections.firstIndex(matching: collection) {
-			DispatchQueue.main.async {
-				self.board.collections[index].addNote(note)
-			}
-		}
+	/// create
+	func createNote(withContents content: String, at location: CGPoint = .zero) {
+		let newCollectionID = try! board.addCollection(title: nil, x: Int(location.x), y: Int(location.y))
+		let collectionIndex = board.collections.firstIndex(where: { $0.id == newCollectionID })!
 		
-		removeNote(note)
+		board.collections[collectionIndex].addNote(content: content)
 	}
 	
-	func removeNote(_ note: Board.Collection.Note) {
-		if let index = collectionIndexForNote(note) {
-			DispatchQueue.main.async {
-				self.board.collections[index].removeNote(note)
-				if self.board.collections[index].notes.count <= 0 && !self.board.collections[index].locked {
-					self.removeCollection(self.board.collections[index])
-				}
-			}
-			
-		}
-	}
+	// TODO: Re-implement
+	/// update
+//	func moveNote(_ note: Board.Collection.Note, to collection: Board.Collection) {
+//		if let index = board.collections.firstIndex(matching: collection) {
+//			DispatchQueue.main.async {
+//				self.board.collections[index].addNote(note)
+//			}
+//		}
+//
+//		removeNote(note)
+//	}
 	
-	func removeNote(_ note: Board.Collection.Note, from collection: Board.Collection) {
-		if let index = board.collections.firstIndex(matching: collection) {
-			board.collections[index].removeNote(note)
-		}
-	}
-	
-	// MARK: - Logic Builder
-	
+	/// delete
+//	func deleteNote(_ note: Board.Collection.Note) {
+//		if let index = collectionIndexForNote(note) {
+//			DispatchQueue.main.async {
+//				self.board.collections[index].removeNote(note)
+//				if self.board.collections[index].notes.count <= 0 && !self.board.collections[index].locked {
+//					self.removeCollection(self.board.collections[index])
+//				}
+//			}
+//
+//		}
+//	}
 }
 
 extension Board.Collection {

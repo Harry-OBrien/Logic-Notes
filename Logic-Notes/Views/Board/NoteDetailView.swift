@@ -29,7 +29,6 @@ struct NoteDetailView: View {
 		VStack {
 			// Top bar
 			HStack {
-				
 				Button(action: {
 					onCancel()
 				}, label: {

@@ -22,7 +22,6 @@ struct BaseBlock<Content: View, Block: LogicBlockShape>: View {
 						.brightness(-0.15)
 				)
 				.foregroundColor(shapeColour)
-				.frame(maxHeight: .infinity)
 			
 			content()
 				.offset(y: -block.notchRect.height/2)

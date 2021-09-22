@@ -36,7 +36,7 @@ struct BoardView: View {
 					// Bottom Bar
 					HStack {
 						BottomBarButton {
-							NavigationLink(destination: LogicBuilder()
+							NavigationLink(destination: LogicBoardContainerView(board: document)
 											.navigationTitle("'\(document.boardTitle)' Logic")) {
 								HStack {
 									Image(systemName: "gearshape.2.fill")
@@ -58,12 +58,11 @@ struct BoardView: View {
 					}
 					.padding()
 					.frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60, alignment: .trailing)
-					// This is a bit janky, but we move...
+					// This is a bit janky but we move...
 					.position(x: geometry.size.width / 2, y: geometry.size.height - 100)
-					
 				}
 				.background(Color.white)
-				.onDrop(of: Board.Collection.Note.writableTypeIdentifiersForItemProvider, isTargeted: nil, perform: { providers, location in
+				.onDrop(of: [.text], isTargeted: nil, perform: { providers, location in
 					var location = geometry.convert(location, from: .global)
 					location = CGPoint(x: location.x - geometry.size.width / 2, y: location.y - geometry.size.height / 2)
 					location = CGPoint(x: location.x - self.panOffset.width, y: location.y - self.panOffset.height)
@@ -77,20 +76,19 @@ struct BoardView: View {
 				.navigationTitle(document.boardTitle)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarItems(trailing: Button(action: {
-					print("yeet)")
+					print("ellipsis pressed!)")
 				}, label: {
 					Image(systemName: "ellipsis")
 						.foregroundColor(.black)
 				}))
 			}
-			.environmentObject(document)
 			.navigationViewStyle(StackNavigationViewStyle())
 			.gesture(self.panGesture())
 			.gesture(self.zoomGesture())
 			.edgesIgnoringSafeArea([.horizontal, .bottom])
 			.sheet(isPresented: $addNotePresented) {
 				NoteDetailView { newNoteContent in
-					document.addNote(newNoteContent)
+					document.createNote(withContents: newNoteContent)
 					addNotePresented.toggle()
 				} onCancel: {
 					addNotePresented.toggle()
@@ -151,8 +149,8 @@ struct BoardView: View {
 	}
 	
 	private func drop(providers: [NSItemProvider], at location: CGPoint) -> Bool {
-		let found = providers.loadFirstObject(ofType: Board.Collection.Note.self) { note in
-			document.addNote(note, at: location)
+		let found = providers.loadFirstObject(ofType: String.self) { noteContent in
+			document.createNote(withContents: noteContent, at: location)
 		}
 		
 		return found
@@ -176,6 +174,6 @@ struct BoardView: View {
 
 struct BoardView_Previews: PreviewProvider {
 	static var previews: some View {
-		BoardView(board: Board.getMockBoard2())
+		BoardView(board: Board.mockBoard1)
 	}
 }
