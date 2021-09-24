@@ -11,7 +11,7 @@ import SwiftUI
 struct Logic_NotesApp: App {
     var body: some Scene {
         WindowGroup {
-			BoardView(board: Board.mockBoard1)
+			BoardView(board: Board.mockBoard)
         }
     }
 }

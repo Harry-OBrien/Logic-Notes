@@ -25,7 +25,7 @@ class BoardCollectionTests: XCTestCase {
 	
 	// Must be able to add collections to board
 	func test_can_add_collection_to_board() throws {
-		try testBoard.addCollection(title: "To Do")
+		try testBoard.createCollection(id: "To Do")
 	}
 	
 	// Collections must have unique title
@@ -34,10 +34,10 @@ class BoardCollectionTests: XCTestCase {
 		var error: Board.Collection.CreationError?
 		
 		// Add an initial collection (this should not throw)
-		try testBoard.addCollection(title: "To Do")
+		try testBoard.createCollection(id: "To Do")
 		
 		// Create a new collection with the same name and verify we DO throw an error
-		XCTAssertThrowsError(try testBoard.addCollection(title: "To Do")) { thrownError in
+		XCTAssertThrowsError(try testBoard.createCollection(id: "To Do")) { thrownError in
 			error = thrownError as? Board.Collection.CreationError
 		}
 		
@@ -46,26 +46,29 @@ class BoardCollectionTests: XCTestCase {
 	
 	// We must be able to add notes to a collection
 	func test_add_note_to_collection() throws {
+		let collectionID = "To Do"
+		
 		// Create collection
-		try testBoard.addCollection(title: "To Do")
+		try testBoard.createCollection(id: collectionID)
 		
 		// Check no notes currently exist in collection
-		XCTAssertEqual(testBoard.collections[0].notes.count, 0)
+		XCTAssertEqual(testBoard.collections[collectionID]!.notes.count, 0)
 		
 		// Add note to collection
 		let noteContent = "Hello world!"
-		testBoard.collections[0].addNote(content: noteContent)
+		testBoard.collections[collectionID]!.addNote(content: noteContent)
 		
 		// Check we have a single note in the collection
-		XCTAssertEqual(testBoard.collections[0].notes.count, 1)
-		XCTAssertEqual(testBoard.collections[0].notes[0].text, noteContent)
+		XCTAssertEqual(testBoard.collections[collectionID]!.notes.count, 1)
+		XCTAssertEqual(testBoard.collections[collectionID]!.notes[0].text, noteContent)
 	}
 	
 	func test_untitled_collection_yields_unique_name() throws {
-		try testBoard.addCollection(title: "Collection 2")
-		try testBoard.addCollection(title: "Collection 3")
-		try testBoard.addCollection()
-				
-		XCTAssertNotEqual(testBoard.collections[1].id, testBoard.collections[2].id)
+		try testBoard.createCollection(id: "Collection 2")
+		try testBoard.createCollection()
+		
+		let keys = Set(testBoard.collections.keys)
+		
+		XCTAssertEqual(keys.union(keys).count, keys.count)
 	}
 }

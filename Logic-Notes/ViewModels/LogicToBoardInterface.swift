@@ -9,22 +9,22 @@ import SwiftUI
 
 class LogicToBoardInterface: ObservableObject {
 	
-	var board: BoardDocument
-
-	var programs: [Program] {
-		board.associatedPrograms
-	}
+	private var boardDocument: BoardDocument
 	
-	init(board: BoardDocument) {
-		self.board = board
+	init(boardDocument: BoardDocument) {
+		self.boardDocument = boardDocument
 	}
 	
 	var collectionIDs: [String] {
-		board.collections.map {$0.id}
+		boardDocument.collectionIDs
+	}
+
+	var programs: [Program] {
+		boardDocument.associatedPrograms
 	}
 	
-	func targetCollectionChanged(for logicBlock: inout LogicBlock, to newCollectionID: CollectionID) {
-		logicBlock.referencedCollection = newCollectionID
+	func targetCollectionChanged(for logicBlock: LogicBlock, to newCollectionID: CollectionID) {
+
 	}
 	
 	// MARK: - Program Triggers

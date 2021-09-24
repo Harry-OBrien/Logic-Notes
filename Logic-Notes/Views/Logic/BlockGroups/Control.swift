@@ -112,7 +112,7 @@ struct End: View {
 		EndBlock(shapeColour: controlColor) {
 			HStack {
 				Text("stop")
-				VariableSelectionBlock(shapeColor: controlColor, activeIndex: $index, selection: ["all", "this program"])
+				VariableSelectionBlock(shapeColor: controlColor, activeIndex: $index, values: ["all", "this program"])
 			}
 		}
 	}

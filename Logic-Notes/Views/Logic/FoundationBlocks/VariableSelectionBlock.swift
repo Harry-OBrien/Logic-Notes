@@ -12,31 +12,30 @@ struct VariableSelectionBlock: View {
 	private let shapeColor: Color
 	private let borderColor: Color
 	@Binding private var activeIndex: Int?
-	private let selection: [String]
+	private let options: [String]
 	
 	@State private var showVariableOptions = false
 	
-	init(shapeColor: Color, borderColor: Color? = nil, activeIndex: Binding<Int?>, selection: [String]) {
+	init(shapeColor: Color, borderColor: Color? = nil, activeIndex: Binding<Int?>, values: [String]) {
 		self.shapeColor = shapeColor
 		self.borderColor = borderColor ?? shapeColor
 		self._activeIndex = activeIndex
-		self.selection = selection
+		self.options = values
+		
+		// Check index is in range
+		if let index = self.activeIndex, index >= values.count || index < 0 {
+			self.activeIndex = nil
+		}
 	}
 	
 	private let block = VariableBlockShape()
 	
-	private var selectedOption: some View {
-		if (activeIndex != nil &&
-			activeIndex! >= 0 &&
-			activeIndex! < selection.count)
-		{
-			return Text(selection[activeIndex!])
+	private var selectedOption: String? {
+		if options.isEmpty || activeIndex == nil {
+			return nil
 		}
-		else
-		{
-			return Text("select")
-				.foregroundColor(.gray)
-		}
+		
+		return options[activeIndex!]
 	}
 	
 	var body: some View {
@@ -50,11 +49,16 @@ struct VariableSelectionBlock: View {
 				).foregroundColor(shapeColor)
 			
 			HStack {
-				selectedOption
-				
-				Image(systemName: "triangle.fill")
-					.rotationEffect(Angle(degrees: 180))
-					.font(.body)
+				if !options.isEmpty {
+					Text(selectedOption ?? "Select")
+						.foregroundColor(Color(white: activeIndex != nil ? 1 : 0.85))
+					Image(systemName: "triangle.fill")
+						.rotationEffect(Angle(degrees: 180))
+						.font(.body)
+				} else {
+					Text("N/A")
+						.foregroundColor(Color(white: 0.85))
+				}
 			}
 			.foregroundColor(.white)
 			.font(.title2.bold())
@@ -62,46 +66,37 @@ struct VariableSelectionBlock: View {
 		}
 		.frame(minWidth: 50, minHeight: 35, alignment: .center)
 		.fixedSize()
+		.onTapGesture {
+			if !options.isEmpty {
+				showVariableOptions.toggle()
+			}
+		}
 		.popover(isPresented: $showVariableOptions, arrowEdge: .top) {
-			Group {
-				if selection.count > 0 {
-					List(selection.indices, id: \.self) { idx in
-						Text(selection[idx])
-							.foregroundColor(.black)
-							.font(.title3)
-							.onTapGesture {
-								self.activeIndex = idx
-								self.showVariableOptions = false
-							}
-						
+			// TODO: Fix so we can click the row and not the text
+			List(options.indices) { idx in
+				Text(options[idx])
+					.foregroundColor(.black)
+					.font(.title3)
+					.onTapGesture {
+						self.activeIndex = idx
+						self.showVariableOptions = false
 					}
-				}
-				else {
-					Button {
-						print("New var pressed!")
-					} label: {
-						HStack {
-							Text("new variable")
-							Image(systemName: "plus")
-						}
-						.buttonStyle(.bordered)
-					}
-				}
 			}
 			.frame(minWidth: 250, minHeight: 300)
-		}
-		.onTapGesture {
-			showVariableOptions.toggle()
 		}
 	}
 }
 
-//struct VariableSelectionBlock_Previews: PreviewProvider {
-//	static var previews: some View {
-//		VStack {
-//			VariableSelectionBlock(shapeColor: .blue, activeIndex: 0, selection: [])
-//			VariableSelectionBlock(shapeColor: .blue, activeIndex: 0, selection: [1, 2, 3].map { "\($0)" })
-//			VariableSelectionBlock(shapeColor: .blue, activeIndex: 0, selection: ["a", "b", "c"])
-//		}
-//	}
-//}
+struct VariableSelectionBlock_Previews: PreviewProvider {
+	@State static var index1: Int? = nil
+	@State static var index2: Int? = 2
+	@State static var index3: Int? = nil
+	
+	static var previews: some View {
+		VStack {
+			VariableSelectionBlock(shapeColor: .blue, activeIndex: $index1, values: [])
+			VariableSelectionBlock(shapeColor: .blue, activeIndex: $index2, values: [1, 2, 3].map { "\($0)" })
+			VariableSelectionBlock(shapeColor: .blue, activeIndex: $index3, values: ["a", "b", "c"])
+		}
+	}
+}

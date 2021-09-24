@@ -33,7 +33,7 @@ struct NoteCollectionView: View {
 	private let baseSize = CGSize(width: 200, height: 200)
 	var zoomScale: CGFloat
 	private var size: CGSize {
-		get {
+		get {			
 			// More than 1 note: expand the width
 			if notes.count > 1 {
 				let width = baseSize.width + NoteView.size.width * (CGFloat(collection.notes.count) - 1)
@@ -69,8 +69,6 @@ struct NoteCollectionView: View {
 				}
 			}
 	}
-	
-	@State var text = ""
 	
 	// MARK: Body
 	var body: some View {

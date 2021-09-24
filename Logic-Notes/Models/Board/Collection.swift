@@ -32,9 +32,8 @@ extension Board {
 	}
 	
 	// MARK: Collection creation
-	// Create collection containing a single note
-	@discardableResult
-	mutating func addCollection(title id: CollectionID? = nil, locked: Bool = false, x: Int = 0, y: Int = 0) throws -> String {
+	// Create collection
+	mutating func createCollection(id: CollectionID? = nil, locked: Bool = false, x: Int = 0, y: Int = 0) throws {
 		var namedID: CollectionID!
 		
 		// If we have been passed a title for the new collection
@@ -60,7 +59,7 @@ extension Board {
 			}
 		}
 		
-		// TODO: Check names of collections to ensure no code injection or weird characters
+		// TODO: Check name of collection to ensure no code injection or weird characters being introduced
 		
 		// Create the new collection
 		let newCollection = Collection(id: namedID,
@@ -70,17 +69,11 @@ extension Board {
 									   y: y)
 		
 		// Add to the boards array of collections
-		collections.append(newCollection)
-		
-		return newCollection.id
-	}
-		
-	var json: Data? {
-		return try? JSONEncoder().encode(self)
+		collections[newCollection.id] = newCollection
 	}
 	
 	// Check if collection exists
-	func collectionExists(id collectionTitle: String) -> Bool {
-		return collections.contains(where: {$0.id == collectionTitle})
+	func collectionExists(id: String) -> Bool {
+		return collections[id] != nil
 	}
 }

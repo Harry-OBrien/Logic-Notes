@@ -54,7 +54,7 @@ struct SetX: View {
 				Text("set x coordinate of collection")
 				VariableSelectionBlock(shapeColor: motionColour,
 									   activeIndex: $index,
-									   selection: collections)
+									   values: collections)
 				VariablePlaceholder(borderColor: motionColour) {
 					Text("\(newX)")
 				}
@@ -108,7 +108,7 @@ struct SetY: View {
 				Text("set y coordinate of collection")
 				VariableSelectionBlock(shapeColor: motionColour,
 									   activeIndex: $index,
-									   selection: collections)
+									   values: collections)
 				VariablePlaceholder(borderColor: motionColour) {
 					Text("\(newY)")
 				}

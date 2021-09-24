@@ -19,7 +19,7 @@ struct PlaySound: View {
 				Text("play sound")
 				VariableSelectionBlock(shapeColor: soundColor,
 									   activeIndex: $index,
-									   selection: ["Meow", "Whistle", "Bell", "Air Horn"])
+									   values: ["Meow", "Whistle", "Bell", "Air Horn"])
 				Text("until done")
 			}
 		}

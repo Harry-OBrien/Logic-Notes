@@ -20,7 +20,12 @@ struct LogicBuilderView: View {
 					}
 					else {
 						ForEach(logicBackend.programs) { program in
-							ProgramView(program: program)
+							// Display the program
+							VStack(alignment: .leading, spacing: -10) {
+								ForEach(program.code, id: \.self.id) { block in
+									viewFor(block, logicBackend: logicBackend)
+								}
+							}
 						}
 					}
 				}
@@ -60,9 +65,9 @@ struct LogicBuilderView: View {
 
 struct LogicDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-		let board = Board.mockBoard1
+		let board = Board.mockBoard
 		let boardDocument =  BoardDocument(board: board)
-		let backend = LogicToBoardInterface(board: boardDocument)
+		let backend = LogicToBoardInterface(boardDocument: boardDocument)
 		
 		LogicBuilderView()
 			.environmentObject(backend)

@@ -9,6 +9,8 @@ import Foundation
 
 struct Program: Identifiable {
 	let id: UUID
+	
+	// TODO: Look into type erasure to make logic block identifiable (https://developer.apple.com/forums/thread/130177)
 	var code: [LogicBlock]
 	let x: Int
 	let y: Int

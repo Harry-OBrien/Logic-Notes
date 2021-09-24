@@ -1,5 +1,5 @@
 //
-//  MoveCollectionUserLogicBuilderTests.swift
+//  MoveCollectionLogicBuilderTests.swift
 //  Logic-NotesTests
 //
 //  Created by Harry O'Brien on 20/09/2021.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Logic_Notes
 
-class MoveCollectionUserLogicBuilderTests: XCTestCase {
+class MoveCollectionLogicBuilderTests: XCTestCase {
 	
 	var testBoard: Board!
 	
@@ -17,8 +17,8 @@ class MoveCollectionUserLogicBuilderTests: XCTestCase {
 		
 		// Create the board
 		testBoard = Board(title: "Test Board")
-		try testBoard.addCollection(title: "my collection", x: 0, y: 0)
-		try testBoard.addCollection(title: "collection 2", x: 0, y: 0)
+		try testBoard.createCollection(id: "my collection", x: 0, y: 0)
+		try testBoard.createCollection(id: "collection 2", x: 0, y: 0)
 		
 		// Create the logic program
 		let program = Program(

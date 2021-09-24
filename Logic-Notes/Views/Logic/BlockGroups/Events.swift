@@ -30,7 +30,7 @@ struct BroadcastReceive: View {
 				Text("when I receive")
 				VariableSelectionBlock(shapeColor: eventColor,
 									   activeIndex: $index,
-									   selection: ["Message_1", "Message_2", "Message_3"])
+									   values: ["Message_1", "Message_2", "Message_3"])
 			}
 		}
 	}
@@ -45,7 +45,7 @@ struct BroadcastSend: View {
 				Text("send")
 				VariableSelectionBlock(shapeColor: eventColor,
 									   activeIndex: $index,
-									   selection: ["Message_1", "Message_2", "Message_3"])
+									   values: ["Message_1", "Message_2", "Message_3"])
 			}
 		}
 	}
@@ -59,7 +59,7 @@ struct BroadcastSendAndWait: View {
 				Text("send")
 				VariableSelectionBlock(shapeColor: eventColor,
 									   activeIndex: $index,
-									   selection: ["Message_1", "Message_2", "Message_3"])
+									   values: ["Message_1", "Message_2", "Message_3"])
 				Text("and wait")
 			}
 		}

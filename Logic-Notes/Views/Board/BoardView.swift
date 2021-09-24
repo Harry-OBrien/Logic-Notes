@@ -27,16 +27,16 @@ struct BoardView: View {
 		GeometryReader { geometry in
 			NavigationView {
 				ZStack() {
-					ForEach(document.collections) { collection in
-						NoteCollectionView(document: document, collection: collection, zoomScale: zoomScale)
+					ForEach(document.collectionIDs, id: \.self) { collectionKey in
+						NoteCollectionView(document: document, collection: document.collections[collectionKey]!, zoomScale: zoomScale)
 							.transition(.opacity)
-							.position(self.position(for: collection, in: geometry.size))
+							.position(self.position(for: document.collections[collectionKey]!, in: geometry.size))
 					}
 					
 					// Bottom Bar
 					HStack {
 						BottomBarButton {
-							NavigationLink(destination: LogicBoardContainerView(board: document)
+							NavigationLink(destination: LogicBoardContainerView(document: document)
 											.navigationTitle("'\(document.boardTitle)' Logic")) {
 								HStack {
 									Image(systemName: "gearshape.2.fill")
@@ -174,6 +174,6 @@ struct BoardView: View {
 
 struct BoardView_Previews: PreviewProvider {
 	static var previews: some View {
-		BoardView(board: Board.mockBoard1)
+		BoardView(board: Board.mockBoard)
 	}
 }
