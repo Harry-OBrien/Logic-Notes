@@ -12,12 +12,7 @@ protocol LogicBlock: Codable {
 	var type: LogicBlockType { get }
 	var referencedCollection: CollectionID? { get set }
 	
-	func execute()
-}
-
-extension LogicBlock {
-	// Default behaviour of a logic block is to do nothing
-	func execute() { }
+	var execute: ((Board.Collection) -> Board.Collection?) { get }
 }
 
 extension LogicBlock {

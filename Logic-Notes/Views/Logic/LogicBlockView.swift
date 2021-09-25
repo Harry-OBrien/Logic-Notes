@@ -7,19 +7,22 @@
 
 import SwiftUI
 
-func viewFor(_ logicBlock: LogicBlock, logicBackend: LogicToBoardInterface) -> some View {
+func viewFor(_ logicBlock: LogicBlock, in program: Program?, boardDocument: BoardDocument) -> some View {
 	Group {
 		switch(logicBlock.type) {
 				// Motion
 			case .SetX:
-				let block = logicBlock as! SetXLogicBlock
-				SetX(for: logicBackend.collectionIDs, to: block.xVal, targetCollectionDidChange: { collectionID in
-					logicBackend.targetCollectionChanged(for: logicBlock, to: collectionID)
+				var block = logicBlock as! SetXLogicBlock
+				SetX(for: boardDocument.collectionIDs, to: block.xVal, targetCollectionDidChange: { collectionID in
+					if let program = program {
+						block.referencedCollection = collectionID
+						boardDocument.update(logicBlock: block as LogicBlock, in: program)
+					}
 				})
 				
 			case .SetY:
 				let block = logicBlock as! SetYLogicBlock
-				SetY(for: logicBackend.collectionIDs, to: block.yVal)
+				SetY(for: boardDocument.collectionIDs, to: block.yVal)
 				
 			case .XPos:
 				XPosition()

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16028A16267D011E007E6EC3 /* VariableBlockShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16028A15267D011E007E6EC3 /* VariableBlockShape.swift */; };
-		1639944D26F8AE280098BBF2 /* MoveCollectionLogicBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639944C26F8AE280098BBF2 /* MoveCollectionLogicBuilderTests.swift */; };
+		1639944D26F8AE280098BBF2 /* LogicBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639944C26F8AE280098BBF2 /* LogicBuilderTests.swift */; };
 		1639944F26F91B900098BBF2 /* LogicBlockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639944E26F91B900098BBF2 /* LogicBlockType.swift */; };
 		1639945126F9FC460098BBF2 /* AnyLogicBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639945026F9FC460098BBF2 /* AnyLogicBlock.swift */; };
 		1639949F26FAAC280098BBF2 /* ProgramModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1639949E26FAAC280098BBF2 /* ProgramModelTests.swift */; };
@@ -20,6 +20,7 @@
 		1641048A26FD1EAF009CAC97 /* TestBoardJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1641048926FD1EAF009CAC97 /* TestBoardJSON.json */; };
 		1641048C26FD46F1009CAC97 /* BoardJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1641048B26FD46F1009CAC97 /* BoardJSON.json */; };
 		1641049026FE2AA0009CAC97 /* LogicBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1641048F26FE2AA0009CAC97 /* LogicBlockView.swift */; };
+		1641049226FE308A009CAC97 /* BoardLogicInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1641049126FE308A009CAC97 /* BoardLogicInterfaceTests.swift */; };
 		1644B1DD2676258500241DC1 /* WrappingBlockShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1644B1DC2676258500241DC1 /* WrappingBlockShape.swift */; };
 		1644B1DF26762BE800241DC1 /* WrappingBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1644B1DE26762BE800241DC1 /* WrappingBlock.swift */; };
 		164D481C26F10B09008396FC /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164D481B26F10B09008396FC /* Collection.swift */; };
@@ -62,7 +63,6 @@
 		16DD23542668FB2900ECCED8 /* Hide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD23532668FB2900ECCED8 /* Hide.swift */; };
 		16DF2170266FD51C009661C2 /* CrumpleBTrimmed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */; };
 		16DF2172266FD5C5009661C2 /* UnCrumpleBTrimmed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */; };
-		16DF9571269B106C0070845B /* LogicToBoardInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF9570269B106C0070845B /* LogicToBoardInterface.swift */; };
 		16DF9574269C74330070845B /* LogicBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF9573269C74330070845B /* LogicBlockProtocol.swift */; };
 		16DF9576269C8DCE0070845B /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DF9575269C8DCE0070845B /* Program.swift */; };
 		16FAC6882675277100B44022 /* Color+rgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FAC6872675277100B44022 /* Color+rgb.swift */; };
@@ -97,7 +97,7 @@
 
 /* Begin PBXFileReference section */
 		16028A15267D011E007E6EC3 /* VariableBlockShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableBlockShape.swift; sourceTree = "<group>"; };
-		1639944C26F8AE280098BBF2 /* MoveCollectionLogicBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCollectionLogicBuilderTests.swift; sourceTree = "<group>"; };
+		1639944C26F8AE280098BBF2 /* LogicBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBuilderTests.swift; sourceTree = "<group>"; };
 		1639944E26F91B900098BBF2 /* LogicBlockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBlockType.swift; sourceTree = "<group>"; };
 		1639945026F9FC460098BBF2 /* AnyLogicBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyLogicBlock.swift; sourceTree = "<group>"; };
 		1639949E26FAAC280098BBF2 /* ProgramModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramModelTests.swift; sourceTree = "<group>"; };
@@ -108,6 +108,7 @@
 		1641048926FD1EAF009CAC97 /* TestBoardJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = TestBoardJSON.json; sourceTree = "<group>"; };
 		1641048B26FD46F1009CAC97 /* BoardJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = BoardJSON.json; sourceTree = "<group>"; };
 		1641048F26FE2AA0009CAC97 /* LogicBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBlockView.swift; sourceTree = "<group>"; };
+		1641049126FE308A009CAC97 /* BoardLogicInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardLogicInterfaceTests.swift; sourceTree = "<group>"; };
 		1644B1DC2676258500241DC1 /* WrappingBlockShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingBlockShape.swift; sourceTree = "<group>"; };
 		1644B1DE26762BE800241DC1 /* WrappingBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingBlock.swift; sourceTree = "<group>"; };
 		164D481B26F10B09008396FC /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -156,7 +157,6 @@
 		16DD23532668FB2900ECCED8 /* Hide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hide.swift; sourceTree = "<group>"; };
 		16DF216F266FD51C009661C2 /* CrumpleBTrimmed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CrumpleBTrimmed.wav; sourceTree = "<group>"; };
 		16DF2171266FD5C5009661C2 /* UnCrumpleBTrimmed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = UnCrumpleBTrimmed.wav; sourceTree = "<group>"; };
-		16DF9570269B106C0070845B /* LogicToBoardInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicToBoardInterface.swift; sourceTree = "<group>"; };
 		16DF9573269C74330070845B /* LogicBlockProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicBlockProtocol.swift; sourceTree = "<group>"; };
 		16DF9575269C8DCE0070845B /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		16FAC6872675277100B44022 /* Color+rgb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+rgb.swift"; sourceTree = "<group>"; };
@@ -262,8 +262,9 @@
 				1641048726FD188E009CAC97 /* BoardModelTests.swift */,
 				1639949E26FAAC280098BBF2 /* ProgramModelTests.swift */,
 				164D481F26F138B3008396FC /* BoardCollectionModelTests.swift */,
-				1639944C26F8AE280098BBF2 /* MoveCollectionLogicBuilderTests.swift */,
+				1639944C26F8AE280098BBF2 /* LogicBuilderTests.swift */,
 				1641048526FCF44B009CAC97 /* BoardDocumentTests.swift */,
+				1641049126FE308A009CAC97 /* BoardLogicInterfaceTests.swift */,
 			);
 			path = "Logic-NotesTests";
 			sourceTree = "<group>";
@@ -325,7 +326,6 @@
 			isa = PBXGroup;
 			children = (
 				163CB62D265435CA0065D551 /* BoardDocument.swift */,
-				16DF9570269B106C0070845B /* LogicToBoardInterface.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -631,7 +631,6 @@
 				16BBAAD92674CCF80079932C /* RoundedCorners.swift in Sources */,
 				16DF9576269C8DCE0070845B /* Program.swift in Sources */,
 				16951A2B268369BB00837526 /* LogicBuilderView.swift in Sources */,
-				16DF9571269B106C0070845B /* LogicToBoardInterface.swift in Sources */,
 				16693EA2267FB1D400EEBFED /* Sound.swift in Sources */,
 				16FAC68E267540E800B44022 /* LogicBlockShapeProtocol.swift in Sources */,
 				16D884C026545832004A773A /* Logic_NotesApp.swift in Sources */,
@@ -646,7 +645,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1639944D26F8AE280098BBF2 /* MoveCollectionLogicBuilderTests.swift in Sources */,
+				1639944D26F8AE280098BBF2 /* LogicBuilderTests.swift in Sources */,
+				1641049226FE308A009CAC97 /* BoardLogicInterfaceTests.swift in Sources */,
 				1641048626FCF44B009CAC97 /* BoardDocumentTests.swift in Sources */,
 				1639949F26FAAC280098BBF2 /* ProgramModelTests.swift in Sources */,
 				1641048826FD188E009CAC97 /* BoardModelTests.swift in Sources */,

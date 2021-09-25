@@ -58,7 +58,7 @@ class BoardModelTests: XCTestCase {
 			id: programID,
 			code: [
 				FlagPressedLogicBlock(id: blockID1),
-				SetXLogicBlock(id: blockID2, referencedCollection: "Collection 1", xVal: 32),
+				SetXLogicBlock(id: blockID2, referencedCollection: collectionTitle, xVal: 32),
 				SetYLogicBlock(id: blockID3, referencedCollection: nil, yVal: 128),
 				SayLogicBlock(id: blockID4, content: "Test program complete!")
 			],
@@ -95,7 +95,7 @@ class BoardModelTests: XCTestCase {
 		let setXBlock = program.code[1] as! SetXLogicBlock
 		XCTAssertEqual(setXBlock.id, blockID2)
 		XCTAssertEqual(setXBlock.type, .SetX)
-		XCTAssertEqual(setXBlock.referencedCollection, "Collection 1")
+		XCTAssertEqual(setXBlock.referencedCollection, collectionTitle)
 		XCTAssertEqual(setXBlock.xVal, 32)
 		
 		let setYBlock = program.code[2] as! SetYLogicBlock

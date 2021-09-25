@@ -9,35 +9,35 @@ import SwiftUI
 
 struct BoardView: View {
 	
-	@ObservedObject private var document: BoardDocument
+	@ObservedObject private var boardDocument: BoardDocument
 	
 	@GestureState private var gestureZoomScale: CGFloat = 1.0
 	@GestureState private var gesturePanOffset: CGSize = .zero
 	
 	@State private var addNotePresented = false
 	
-	private var zoomScale: CGFloat { document.steadyStateZoomScale * gestureZoomScale }
-	private var panOffset: CGSize { (document.steadyStatePanOffset + gesturePanOffset) * zoomScale }
+	private var zoomScale: CGFloat { boardDocument.steadyStateZoomScale * gestureZoomScale }
+	private var panOffset: CGSize { (boardDocument.steadyStatePanOffset + gesturePanOffset) * zoomScale }
 	
 	init(board: Board) {
-		document = BoardDocument(board: board)
+		boardDocument = BoardDocument(board: board)
 	}
 	
 	var body: some View {
 		GeometryReader { geometry in
 			NavigationView {
 				ZStack() {
-					ForEach(document.collectionIDs, id: \.self) { collectionKey in
-						NoteCollectionView(document: document, collection: document.collections[collectionKey]!, zoomScale: zoomScale)
+					ForEach(boardDocument.collectionIDs, id: \.self) { collectionKey in
+						NoteCollectionView(collection: boardDocument.collections[collectionKey]!, zoomScale: zoomScale)
 							.transition(.opacity)
-							.position(self.position(for: document.collections[collectionKey]!, in: geometry.size))
+							.position(self.position(for: boardDocument.collections[collectionKey]!, in: geometry.size))
 					}
 					
 					// Bottom Bar
 					HStack {
 						BottomBarButton {
-							NavigationLink(destination: LogicBoardContainerView(document: document)
-											.navigationTitle("'\(document.boardTitle)' Logic")) {
+							NavigationLink(destination: LogicBoardContainerView()
+											.navigationTitle("'\(boardDocument.boardTitle)' Logic")) {
 								HStack {
 									Image(systemName: "gearshape.2.fill")
 									Text("logic")
@@ -73,7 +73,7 @@ struct BoardView: View {
 				.onAppear {
 					zoomToFit(in: geometry.size)
 				}
-				.navigationTitle(document.boardTitle)
+				.navigationTitle(boardDocument.boardTitle)
 				.navigationBarTitleDisplayMode(.inline)
 				.navigationBarItems(trailing: Button(action: {
 					print("ellipsis pressed!)")
@@ -88,13 +88,14 @@ struct BoardView: View {
 			.edgesIgnoringSafeArea([.horizontal, .bottom])
 			.sheet(isPresented: $addNotePresented) {
 				NoteDetailView { newNoteContent in
-					document.createNote(withContents: newNoteContent)
+					boardDocument.createNote(withContents: newNoteContent)
 					addNotePresented.toggle()
 				} onCancel: {
 					addNotePresented.toggle()
 				}
 			}
 		}
+		.environmentObject(boardDocument)
 	}
 	
 	private func panGesture() -> some Gesture {
@@ -103,7 +104,7 @@ struct BoardView: View {
 				gesturePanOffset = latestDragGestureValue.translation / self.zoomScale
 			}
 			.onEnded { finalDragGestureValue in
-				self.document.steadyStatePanOffset = self.document.steadyStatePanOffset + (finalDragGestureValue.translation / self.zoomScale)
+				self.boardDocument.steadyStatePanOffset = self.boardDocument.steadyStatePanOffset + (finalDragGestureValue.translation / self.zoomScale)
 			}
 	}
 	
@@ -113,7 +114,7 @@ struct BoardView: View {
 				inOutGestureState = latestGestureScale
 			}
 			.onEnded { (finalGestureScale) in
-				self.document.steadyStateZoomScale *= finalGestureScale
+				self.boardDocument.steadyStateZoomScale *= finalGestureScale
 			}
 	}
 	
@@ -127,16 +128,16 @@ struct BoardView: View {
 	}
 	
 	private func zoomToFit(in size: CGSize) {
-		document.recenterCollections()
-		let bounds = document.boundingBox
+		boardDocument.recenterCollections()
+		let bounds = boardDocument.boundingBox
 		
 		let hZoom = bounds.width / size.width
 		let vZoom = bounds.height / size.height
 		
-		self.document.steadyStatePanOffset = .zero
+		self.boardDocument.steadyStatePanOffset = .zero
 		
 		//		print(1/hZoom, hZoom, 1/vZoom, vZoom)
-		self.document.steadyStateZoomScale = min(min(1/hZoom, hZoom), min(1/vZoom, vZoom)) * 0.9
+		self.boardDocument.steadyStateZoomScale = min(min(1/hZoom, hZoom), min(1/vZoom, vZoom)) * 0.9
 	}
 	
 	private func position(for collection: Board.Collection, in size: CGSize) -> CGPoint {
@@ -150,7 +151,7 @@ struct BoardView: View {
 	
 	private func drop(providers: [NSItemProvider], at location: CGPoint) -> Bool {
 		let found = providers.loadFirstObject(ofType: String.self) { noteContent in
-			document.createNote(withContents: noteContent, at: location)
+			boardDocument.createNote(withContents: noteContent, at: location)
 		}
 		
 		return found

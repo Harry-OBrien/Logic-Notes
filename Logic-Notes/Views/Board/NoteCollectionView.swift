@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteCollectionView: View {
 	
-	@ObservedObject var document: BoardDocument
+	@EnvironmentObject var document: BoardDocument
 	let collection: Board.Collection
 	
 	@State private var showOptions = false

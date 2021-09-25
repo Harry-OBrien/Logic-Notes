@@ -9,21 +9,21 @@ import SwiftUI
 
 struct LogicBuilderView: View {
 	
-	@EnvironmentObject private var logicBackend: LogicToBoardInterface
+	@EnvironmentObject var boardDocument: BoardDocument
 	
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack(alignment: .center) {
 				Group {
-					if logicBackend.programs.isEmpty {
+					if boardDocument.programs.isEmpty {
 						Text("Drag logic blocks here to build something awesome!")
 					}
 					else {
-						ForEach(logicBackend.programs) { program in
+						ForEach(boardDocument.programs) { program in
 							// Display the program
 							VStack(alignment: .leading, spacing: -10) {
 								ForEach(program.code, id: \.self.id) { block in
-									viewFor(block, logicBackend: logicBackend)
+									viewFor(block, in: program, boardDocument: boardDocument)
 								}
 							}
 						}
@@ -36,7 +36,7 @@ struct LogicBuilderView: View {
 				})
 				
 				Button {
-					logicBackend.flagPressedTrigger()
+					boardDocument.execute(trigger: .flagPressed)
 				} label: {
 					ZStack {
 						Circle()
@@ -46,7 +46,7 @@ struct LogicBuilderView: View {
 						
 						VStack {
 							Image(systemName: "flag.fill")
-								.foregroundColor(logicBackend.programs.isEmpty ? .gray : .green)
+								.foregroundColor(boardDocument.programs.isEmpty ? .gray : .green)
 								.frame(alignment: .bottomTrailing)
 								.font(.title.bold())
 							
@@ -67,10 +67,9 @@ struct LogicDetailView_Previews: PreviewProvider {
 	static var previews: some View {
 		let board = Board.mockBoard
 		let boardDocument =  BoardDocument(board: board)
-		let backend = LogicToBoardInterface(boardDocument: boardDocument)
 		
 		LogicBuilderView()
-			.environmentObject(backend)
+			.environmentObject(boardDocument)
 	}
 }
 

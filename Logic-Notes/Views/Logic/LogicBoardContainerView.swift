@@ -8,14 +8,8 @@
 import SwiftUI
 
 struct LogicBoardContainerView: View {
-	@ObservedObject private var boardDocument: BoardDocument
-	@ObservedObject private var logicBackend: LogicToBoardInterface
+	@EnvironmentObject var boardDocument: BoardDocument
 	@State private var showMenu = false
-	
-	init(document: BoardDocument) {
-		self.boardDocument = document
-		self.logicBackend = LogicToBoardInterface(boardDocument: document)
-	}
 	
 	var closingDragGesture: some Gesture {
 		DragGesture()
@@ -33,7 +27,7 @@ struct LogicBoardContainerView: View {
 			ZStack(alignment: .leading) {
 				// Main logic builder interface
 				LogicBuilderView()
-					.environmentObject(logicBackend)
+				
 					.disabled(showMenu ? true : false)
 					.opacity(showMenu ? 0.3 : 1)
 				
@@ -69,7 +63,8 @@ struct LogicBoardContainerView: View {
 
 struct LogicBuilder_Previews: PreviewProvider {
 	static var previews: some View {
-		let board = BoardDocument(board: Board.mockBoard)
-		LogicBoardContainerView(document: board)
+		let doc = BoardDocument(board: Board.mockBoard)
+		LogicBoardContainerView()
+			.environmentObject(doc)
 	}
 }

@@ -7,10 +7,9 @@
 
 import SwiftUI
 
+// TODO: Refactor intents (to make them actual intents and not just CRUD)
 class BoardDocument: ObservableObject {
-	
-	// TODO: Implement better setters and getters for collections so we don't have to do 'let index = ...; board.collections[index].notes = ...'
-	
+		
 	@Published private var board: Board {
 		didSet {
 			//			print("JSON: \(board.json?.utf8 ?? "Empty")")
@@ -18,7 +17,6 @@ class BoardDocument: ObservableObject {
 	}
 	
 	var boardTitle: String { board.title }
-	var associatedPrograms: [Program] { board.associatedPrograms }
 	
 	@Published var steadyStateZoomScale: CGFloat = 1.0
 	@Published var steadyStatePanOffset: CGSize = .zero
@@ -68,7 +66,7 @@ class BoardDocument: ObservableObject {
 		}
 	}
 	
-	// MARK: - Collection Intent(s)
+	// MARK:  Collection Intent(s)
 	// Create, Read, Update, Delete
 	/// Create
 	func createCollection(titled title: String? = nil, at location: CGPoint = .zero) throws {
@@ -87,33 +85,29 @@ class BoardDocument: ObservableObject {
 	
 	/// update
 	func moveCollection(_ collection: Board.Collection, by offset: CGSize) {
-		let id = collection.id
-		if !board.collectionExists(id: id) {
-			return
-		}
-		
-		board.collections[id]!.x += Int(offset.width)
-		board.collections[id]!.y += Int(offset.height)
+		board.collections[collection.id]?.x += Int(offset.width)
+		board.collections[collection.id]?.y += Int(offset.height)
+	}
+	
+	func moveCollection(_ collection: Board.Collection, to point: CGPoint) {
+		board.collections[collection.id]?.x = Int(point.x)
+		board.collections[collection.id]?.y = Int(point.y)
 	}
 	
 	/// Update
 	func renameCollection(_ old: Board.Collection, to newTitle: String) throws {
+		// We don't need to do anything if we're changing to the same name
+		if old.id == newTitle {
+			return
+		}
+		
 		try board.createCollection(id: newTitle, locked: old.locked, x: old.x, y: old.y)
 		deleteCollection(old)
 	}
 	
 	/// update
 	func toggleCollectionLocked(_ collection: Board.Collection) {
-		if !board.collectionExists(id: collection.id) {
-			return
-		}
-		
-		board.collections[collection.id]!.locked.toggle()
-		
-		// TODO: Warn user of deletion
-		//			if board.collections[index].notes.count <= 0 && !board.collections[index].locked {
-		//				removeCollection(collection)
-		//			}
+		board.collections[collection.id]?.locked.toggle()
 	}
 	
 	/// delete
@@ -121,7 +115,7 @@ class BoardDocument: ObservableObject {
 		board.collections.removeValue(forKey: collection.id)
 	}
 	
-	// MARK: - Note Intent(s)
+	// MARK: Note Intent(s)
 	// Create (Read) Update Delete
 	
 	/// create
@@ -168,5 +162,62 @@ extension Board.Collection {
 			}
 		}
 		return nil
+	}
+}
+
+// MARK: - Board Logic
+// Everything related to the logic/programming on the board
+extension BoardDocument {
+	// MARK: Program intentions
+	// Create program
+	
+	// Read single program
+	
+	// Read programs
+	var programs: [Program] { board.associatedPrograms }
+	
+	// Update program
+	
+	// Delete program
+	
+	// MARK: Logic Block Intentions
+	// Create
+	
+	// Get single
+	
+	// Read all
+	
+	// Update block
+	func update(logicBlock newBlock: LogicBlock, in program: Program) {
+		if let programIndex = programs.firstIndex(matching: program),
+		   let blockIdx = programs[programIndex].code.firstIndex(where: { $0.id == newBlock.id }){
+			board.associatedPrograms[programIndex].code[blockIdx] = newBlock
+		}
+	}
+	
+	// MARK: - Program Triggers
+	func execute(trigger: Program.Trigger) {
+		switch trigger {
+			case .flagPressed:
+				flagPressed()
+				
+			default:
+				break
+		}
+	}
+	
+	private func flagPressed() {
+		print("Flag pressed!")
+		
+		// For every program
+		for program in programs {
+			// If program is activated by the flag press
+			if case .flagPressed = program.trigger {
+				// Execute all of the code blocks in order
+				for codeBlock in program.code {
+					codeBlock.execute()
+				}
+			}
+		}
 	}
 }

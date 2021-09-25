@@ -29,8 +29,8 @@
 					"type" : "FlagPressed"
 				},
 				{
-					"referencedCollection" : "Test collection",
 					"id" : "68700059-FFAD-4155-BEAB-CD523983008C",
+					"referencedCollection" : "Test collection",
 					"associatedValue" : 32,
 					"type" : "SetX"
 				},

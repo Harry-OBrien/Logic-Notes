@@ -19,23 +19,35 @@ struct SetXLogicBlock: LogicBlock, Identifiable {
 	var referencedCollection: String?
 	var xVal: Int
 	
+	var execute: ((Board.Collection) -> Board.Collection?)
+
 	init(id: UUID? = nil, referencedCollection: String?, xVal: Int) {
 		self.id = id ?? UUID()
 		
 		self.type = .SetX
 		self.referencedCollection = referencedCollection
 		self.xVal = xVal
+		
+		self.execute = { [self] collection in
+			var newCollection = collection
+			newCollection.x = self.xVal
+			
+			return newCollection
+		}
 	}
 	
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: LogicBlockCodingKeys.self)
 		
-		self.id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
-		self.type = try container.decode(LogicBlockType.self, forKey: .type)
-		assert(self.type == .SetX)
+		let id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
 		
-		self.referencedCollection = try container.decodeIfPresent(String.self, forKey: .referencedCollection)
-		self.xVal = try container.decode(Int.self, forKey: .associatedValue)
+		let type = try container.decode(LogicBlockType.self, forKey: .type)
+		assert(type == .SetX)
+		
+		let referencedCollection = try container.decodeIfPresent(String.self, forKey: .referencedCollection)
+		let xVal = try container.decode(Int.self, forKey: .associatedValue)
+		
+		self.init(id: id, referencedCollection: referencedCollection, xVal: xVal)
 	}
 	
 	func encode(to encoder: Encoder) throws {
@@ -47,10 +59,6 @@ struct SetXLogicBlock: LogicBlock, Identifiable {
 		// then our associated value
 		try container.encode(xVal, forKey: .associatedValue)
 	}
-	
-	func execute() {
-		print("moving \(referencedCollection ?? "N/A") to \(xVal)")
-	}
 }
 
 struct SetYLogicBlock: LogicBlock, Identifiable {
@@ -60,23 +68,36 @@ struct SetYLogicBlock: LogicBlock, Identifiable {
 	
 	var yVal: Int
 	
+	var execute: ((Board.Collection) -> Board.Collection?)
+
 	init(id: UUID? = nil, referencedCollection: String?, yVal: Int) {
 		self.id = id ?? UUID()
 		
 		self.type = .SetY
 		self.referencedCollection = referencedCollection
 		self.yVal = yVal
+				
+		let execute: ((Board.Collection) -> Board.Collection) = { [self] collection in
+			var newCollection = collection
+			newCollection.y = self.yVal
+			
+			return newCollection
+		}
+		
+		self.execute = execute
 	}
 	
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: LogicBlockCodingKeys.self)
 		
-		self.id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
-		self.type = try container.decode(LogicBlockType.self, forKey: .type)
-		assert(self.type == .SetY)
+		let id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
+		let type = try container.decode(LogicBlockType.self, forKey: .type)
+		assert(type == .SetY)
 		
-		self.referencedCollection = try container.decodeIfPresent(String.self, forKey: .referencedCollection)
-		self.yVal = try container.decode(Int.self, forKey: .associatedValue)
+		let referencedCollection = try container.decodeIfPresent(String.self, forKey: .referencedCollection)
+		let yVal = try container.decode(Int.self, forKey: .associatedValue)
+		
+		self.init(id: id, referencedCollection: referencedCollection, yVal: yVal)
 	}
 	
 	func encode(to encoder: Encoder) throws {
@@ -88,10 +109,6 @@ struct SetYLogicBlock: LogicBlock, Identifiable {
 		// then our associated value
 		try container.encode(yVal, forKey: .associatedValue)
 	}
-	
-	func execute() {
-		print("moving \(referencedCollection ?? "N/A") to \(yVal)")
-	}
 }
 
 // MARK: - Looks
@@ -102,22 +119,30 @@ struct SayLogicBlock: LogicBlock, Identifiable {
 	
 	var content: String
 	
+	var execute: ((Board.Collection) -> Board.Collection?)
+	
 	init(id: UUID? = nil, content: String) {
 		self.id = id ?? UUID()
 		
 		self.type = .Say
 		self.content = content
+		
+		self.execute = { [self] _ in
+			print(self.content)
+			return nil
+		}
 	}
 	
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: LogicBlockCodingKeys.self)
 		
-		self.id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
-		self.type = try container.decode(LogicBlockType.self, forKey: .type)
-		assert(self.type == .Say)
+		let id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
+		let type = try container.decode(LogicBlockType.self, forKey: .type)
+		assert(type == .Say)
 		
-		self.referencedCollection = try container.decodeIfPresent(String.self, forKey: .referencedCollection)
-		self.content = try container.decode(String.self, forKey: .associatedValue)
+		let content = try container.decode(String.self, forKey: .associatedValue)
+		
+		self.init(id: id, content: content)
 	}
 	
 	func encode(to encoder: Encoder) throws {
@@ -128,10 +153,6 @@ struct SayLogicBlock: LogicBlock, Identifiable {
 		
 		// then our associated value
 		try container.encode(content, forKey: .associatedValue)
-	}
-	
-	func execute() {
-		print(content)
 	}
 }
 
@@ -144,19 +165,25 @@ struct FlagPressedLogicBlock: LogicBlock, Identifiable {
 	let type: LogicBlockType
 	var referencedCollection: String?
 	
+	var execute: ((Board.Collection) -> Board.Collection?)
+
 	init(id: UUID? = nil) {
 		self.id = id ?? UUID()
 		
 		self.type = .FlagPressed
+		
+		self.execute = { _ in return nil }
 	}
 	
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: LogicBlockCodingKeys.self)
 		
 		// Decode values
-		self.id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
-		self.type = try container.decode(LogicBlockType.self, forKey: .type)
-		assert(self.type == .FlagPressed)
+		let id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
+		let type = try container.decode(LogicBlockType.self, forKey: .type)
+		assert(type == .FlagPressed)
+		
+		self.init(id: id)
 	}
 	
 	func encode(to encoder: Encoder) throws {

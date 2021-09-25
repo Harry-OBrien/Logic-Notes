@@ -34,7 +34,7 @@ struct SetX: View {
 	@State private var index: Int? = nil {
 		didSet {
 			// Inform model
-			// The user can never set the collection back to nil, so we can safely unwrap the optional value here
+			// The user can never set the collection back to nil so we can safely unwrap
 			targetCollectionDidChange(collections[index!])
 		}
 	}
