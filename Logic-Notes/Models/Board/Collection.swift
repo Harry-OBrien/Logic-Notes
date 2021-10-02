@@ -21,13 +21,6 @@ extension Board {
 		
 		enum CreationError: Error {
 			case notUnique
-			
-			var errorDescription: String? {
-				switch self {
-					case .notUnique:
-						return "The name you have chosen already exists on this board and must be unique"
-				}
-			}
 		}
 	}
 	
@@ -59,8 +52,6 @@ extension Board {
 			}
 		}
 		
-		// TODO: Check name of collection to ensure no code injection or weird characters being introduced
-		
 		// Create the new collection
 		let newCollection = Collection(id: namedID,
 									   notes: [],
@@ -74,6 +65,7 @@ extension Board {
 	
 	// Check if collection exists
 	func collectionExists(id: String) -> Bool {
+
 		return collections[id] != nil
 	}
 }
